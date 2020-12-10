@@ -28,11 +28,12 @@ public class ApartmentService {
     return apartmentRepository.save(apartment);
   }
 
+  public Iterable<Apartment> getAll() {
+   return apartmentRepository.findAll();
+  }
 
 
-
-
-  /*public Iterable<Apartment> getAll() {*/
-  /*  return apartmentRepository.findAll();*/
-  /*}*/
+  public void deleteById(Long id) {
+    apartmentRepository.deleteById(id);
+  }
 }
