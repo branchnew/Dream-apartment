@@ -1,6 +1,6 @@
 package com.group5.dreamapartment;
 
-public enum Kitchenstatus {
+public enum Kitchentype {
 
     Kök,
     Kokvrå
