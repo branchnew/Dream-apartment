@@ -1,7 +1,7 @@
 package com.group5.dreamapartment.entity;
 
 import javax.persistence.*;
-import com.group5.dreamapartment.Kitchenstatus;
+import com.group5.dreamapartment.Kitchentype;
 
 @Entity
 @Table
@@ -36,20 +36,20 @@ public class Apartment {
     this.rooms = rooms;
   }
 
-  public Kitchenstatus getKitchenstatus() {
-    return kitchenstatus;
+  public String getKitchentype() {
+    return kitchentype;
   }
 
-  public void setKitchenstatus(Kitchenstatus kitchenstatus) {
-    this.kitchenstatus = kitchenstatus;
+  public void setKitchentype(String kitchentype) {
+    this.kitchentype = kitchentype;
   }
 
-  public String getAdress() {
+  public String getAddress() {
     return address;
   }
 
-  public void setAdress(String adress) {
-    this.address = adress;
+  public void setAddress(String address) {
+    this.address = address;
   }
 
   public int getApartmentNumber() {
@@ -68,12 +68,12 @@ public class Apartment {
     this.rent = rent;
   }
 
-  public boolean isStatus() {
-    return status;
+  public boolean isAvailble() {
+    return availble;
   }
 
-  public void setStatus(boolean status) {
-    this.status = status;
+  public void setAvailble(boolean availble) {
+    this.availble = availble;
   }
 
   @Column
@@ -81,7 +81,7 @@ public class Apartment {
   @Column
     private Byte rooms;
   @Column
-    private Kitchenstatus kitchenstatus;
+    private String kitchentype;
   @Column
     private String address;
   @Column
@@ -89,7 +89,7 @@ public class Apartment {
   @Column
    private int rent;
   @Column
-   private boolean status;
+   private boolean availble;
 
   }
 
