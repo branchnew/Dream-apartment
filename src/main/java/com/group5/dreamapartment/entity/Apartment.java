@@ -1,7 +1,6 @@
 package com.group5.dreamapartment.entity;
 
 import javax.persistence.*;
-import com.group5.dreamapartment.Kitchentype;
 
 @Entity
 @Table
@@ -76,6 +75,14 @@ public class Apartment {
     this.availble = availble;
   }
 
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
   @Column
     private int size;
   @Column
@@ -90,6 +97,7 @@ public class Apartment {
    private int rent;
   @Column
    private boolean availble;
-
+  @Column
+  private String description;
   }
 
