@@ -17,9 +17,11 @@ public class RenterController {
     @Autowired
     private RenterService renterService;
     private AddressService addressService;
+    private AddressService invoiceAddress;
 
-  public RenterController(AddressService addressService) {
+  public RenterController(AddressService addressService, AddressService invoiceAddress) {
     this.addressService = addressService;
+    this.invoiceAddress = invoiceAddress;
   }
 
   @PostMapping
@@ -31,17 +33,18 @@ public class RenterController {
                          @RequestParam String invoiceStreet, @RequestParam String invoiceCity,
                          @RequestParam String invoiceZipCode, @RequestParam String invoiceCountry) {
 
-      Address invoiceAddress = addressService.create(invoiceStreet, invoiceCity, invoiceZipCode, invoiceCountry);
       Address address = addressService.create(street, city, zipCode, country);
-      if(!invoiceAddress.equals(address)){
-        renterService.create(name, socialSecNumber, telNumber, email, address, invoiceAddress);
-      } else {
+      if(street.equals(invoiceStreet) && city.equals(invoiceCity)
+          && zipCode.equals(invoiceZipCode) && country.equals(invoiceCountry)){
         renterService.create(name, socialSecNumber, telNumber, email, address, address);
+      } else {
+        Address invoiceAddress = addressService.create(invoiceStreet, invoiceCity, invoiceZipCode, invoiceCountry);
+        renterService.create(name, socialSecNumber, telNumber, email, address, invoiceAddress);
       }
 
       return "Name: " + name + " Social security number: " + socialSecNumber +
-          " Mobile: " + telNumber + " E-mail: " + email +
-          " Address: " + address + " Invoice address: " + invoiceAddress;
+            " Mobile: " + telNumber + " E-mail: " + email +
+            " Address: " + address + " Invoice address: " + invoiceAddress;
     }
 
     @GetMapping
