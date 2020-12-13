@@ -1,6 +1,6 @@
 package com.group5.dreamapartment.service;
 
-
+import com.group5.dreamapartment.entity.Address;
 import com.group5.dreamapartment.entity.Apartment;
 import com.group5.dreamapartment.repository.ApartmentRepository;
 import org.springframework.stereotype.Service;
@@ -8,15 +8,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class ApartmentService {
   private ApartmentRepository apartmentRepository;
+  private String perfectCondition = "Denna lägenheten är i fint skick";
 
   public ApartmentService(ApartmentRepository apartmentRepository) {
     this.apartmentRepository = apartmentRepository;
   }
 
-  public Apartment create(String address, int apartmentNumber, boolean availble,
-                        String kitchentype, int rent, Byte rooms, int size, String description) {
-    var apartment = new Apartment();
 
+  public Apartment create(Address address, int apartmentNumber, boolean availble,
+                          String kitchentype, int rent, Byte rooms, int size, String description) {
+
+    var apartment = new Apartment();
     apartment.setAddress(address);
     apartment.setApartmentNumber(apartmentNumber);
     apartment.setAvailble(availble);
@@ -26,7 +28,6 @@ public class ApartmentService {
     apartment.setSize(size);
 
     if(description.isEmpty()){
-       String perfectCondition = "Denna lägenheten är i fint skick";
       apartment.setDescription(perfectCondition);
     } else {
       apartment.setDescription(description);

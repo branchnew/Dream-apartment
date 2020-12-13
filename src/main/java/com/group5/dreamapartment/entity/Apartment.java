@@ -4,11 +4,10 @@ import javax.persistence.*;
 
 @Entity
 @Table
-
 public class Apartment {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   public Long getId() {
@@ -43,11 +42,11 @@ public class Apartment {
     this.kitchentype = kitchentype;
   }
 
-  public String getAddress() {
+  public Address getAddress() {
     return address;
   }
 
-  public void setAddress(String address) {
+  public void setAddress(Address address) {
     this.address = address;
   }
 
@@ -89,8 +88,9 @@ public class Apartment {
     private Byte rooms;
   @Column
     private String kitchentype;
-  @Column
-    private String address;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn()
+    private Address address;
   @Column
     private int apartmentNumber;
   @Column

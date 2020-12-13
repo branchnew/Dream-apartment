@@ -1,14 +1,15 @@
 package com.group5.dreamapartment.entity;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
-  @Entity
-  @Table
-
+@Entity
+@Table
 public class Renter {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Long getId() {
@@ -51,19 +52,19 @@ public class Renter {
       this.email = email;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
       return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
       this.address = address;
     }
 
-    public String getInvoiceAddress() {
+    public Address getInvoiceAddress() {
       return invoiceAddress;
     }
 
-    public void setInvoiceAddress(String invoiceAddress) {
+    public void setInvoiceAddress(Address invoiceAddress) {
       this.invoiceAddress = invoiceAddress;
     }
 
@@ -75,9 +76,11 @@ public class Renter {
     private long telNumber;
     @Column
     private String email;
-    @Column
-    private String address;
-    @Column
-    private String invoiceAddress;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn()
+    private Address address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn()
+    private Address invoiceAddress;
   }
 
