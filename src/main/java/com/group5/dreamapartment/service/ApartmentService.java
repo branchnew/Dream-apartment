@@ -14,7 +14,7 @@ public class ApartmentService {
   }
 
   public Apartment create(String address, int apartmentNumber, boolean availble,
-                        String kitchentype, int rent, Byte rooms, int size) {
+                        String kitchentype, int rent, Byte rooms, int size, String description) {
     var apartment = new Apartment();
 
     apartment.setAddress(address);
@@ -25,14 +25,22 @@ public class ApartmentService {
     apartment.setRooms(rooms);
     apartment.setSize(size);
 
+    if(description.isEmpty()){
+       String perfectCondition = "Denna lägenheten är i fint skick";
+      apartment.setDescription(perfectCondition);
+    } else {
+      apartment.setDescription(description);
+    }
+
     return apartmentRepository.save(apartment);
   }
 
+  public Iterable<Apartment> getAll() {
+   return apartmentRepository.findAll();
+  }
 
 
-
-
-  /*public Iterable<Apartment> getAll() {*/
-  /*  return apartmentRepository.findAll();*/
-  /*}*/
+  public void deleteById(Long id) {
+    apartmentRepository.deleteById(id);
+  }
 }
