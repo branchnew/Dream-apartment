@@ -1,7 +1,9 @@
 package com.group5.dreamapartment.service;
 
 import com.group5.dreamapartment.entity.Address;
+import com.group5.dreamapartment.entity.Apartment;
 import com.group5.dreamapartment.entity.Renter;
+import com.group5.dreamapartment.repository.ApartmentRepository;
 import com.group5.dreamapartment.repository.RenterRepository;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +41,14 @@ public class RenterService {
 
   public void deleteById(Long id) {
     this.renterRepository.deleteById(id);
+  }
+
+  public void assignAptToRenter(Apartment apt, Renter renter) {
+    renter.setApartment(apt);
+    renterRepository.save(renter);
+  }
+
+  public Renter findRenter(Long renterID) {
+    return this.renterRepository.findRenterById(renterID);
   }
 }

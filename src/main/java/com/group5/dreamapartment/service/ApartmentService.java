@@ -47,4 +47,8 @@ public class ApartmentService {
   public void deleteById(Long id) {
     apartmentRepository.deleteById(id);
   }
+
+  public Apartment findApt(Long aptId) {
+    return this.apartmentRepository.findApartmentById(aptId);
+  }
 }

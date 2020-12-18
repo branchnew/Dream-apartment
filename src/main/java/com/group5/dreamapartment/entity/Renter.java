@@ -1,6 +1,7 @@
 package com.group5.dreamapartment.entity;
 
 import com.sun.istack.NotNull;
+import com.sun.istack.Nullable;
 
 import javax.persistence.*;
 
@@ -68,6 +69,18 @@ public class Renter {
       this.invoiceAddress = invoiceAddress;
     }
 
+    public void setApartment(Apartment apartment) {
+      this.apartment = apartment;
+    }
+
+    public Apartment getApartment() {
+      return apartment;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn()
+    @Nullable
+    private Apartment apartment;
     @Column
     private String name;
     @Column

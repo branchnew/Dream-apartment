@@ -99,5 +99,16 @@ public class Apartment {
    private boolean status;
   @Column
   private String description;
+
+  public Renter getRenter() {
+    return renter;
+  }
+
+  public void setRenter(Renter renter) {
+    this.renter = renter;
+  }
+
+  @OneToOne()
+  private Renter renter;
   }
 

@@ -4,6 +4,7 @@ import com.group5.dreamapartment.entity.Address;
 import com.group5.dreamapartment.entity.Apartment;
 import com.group5.dreamapartment.entity.Renter;
 import com.group5.dreamapartment.service.AddressService;
+import com.group5.dreamapartment.service.ApartmentService;
 import com.group5.dreamapartment.service.RenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -19,10 +20,12 @@ public class RenterController {
     private RenterService renterService;
     private AddressService addressService;
     private AddressService invoiceAddress;
+    private ApartmentService aptService;
 
-  public RenterController(AddressService addressService, AddressService invoiceAddress) {
+  public RenterController(AddressService addressService, AddressService invoiceAddress, ApartmentService aptService) {
     this.addressService = addressService;
     this.invoiceAddress = invoiceAddress;
+    this.aptService = aptService;
   }
 
   @PostMapping
@@ -53,13 +56,12 @@ public class RenterController {
       return renterService.getAll();
     }
 
-    /*@PutMapping()
-    public Renter assignAptToRenter(@RequestParam Long aptId, @RequestParam Long renterId) {
-      if(){
-
-      }
-    }*/
-
+    @PutMapping()
+    public void aptToRenter(@RequestParam Long aptId, @RequestParam Long renterId) {
+      Apartment apt = aptService.findApt(aptId);
+      Renter renter = renterService.findRenter(renterId);
+      renterService.assignAptToRenter(apt, renter);
+    }
 
   @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {

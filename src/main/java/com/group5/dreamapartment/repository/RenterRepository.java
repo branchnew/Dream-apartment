@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RenterRepository extends PagingAndSortingRepository<Renter, Long >{
+  Renter findRenterById(Long id);
 }
 
 
