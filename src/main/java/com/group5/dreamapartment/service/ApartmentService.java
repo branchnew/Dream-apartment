@@ -13,13 +13,13 @@ public class ApartmentService {
     this.apartmentRepository = apartmentRepository;
   }
 
-  public Apartment create(String address, int apartmentNumber, boolean availble,
+  public Apartment create(String address, int apartmentNumber, boolean status,
                         String kitchentype, int rent, Byte rooms, int size, String description) {
     var apartment = new Apartment();
 
     apartment.setAddress(address);
     apartment.setApartmentNumber(apartmentNumber);
-    apartment.setAvailble(availble);
+    apartment.setStatus(status);
     apartment.setKitchentype(kitchentype);
     apartment.setRent(rent);
     apartment.setRooms(rooms);
@@ -42,5 +42,10 @@ public class ApartmentService {
 
   public void deleteById(Long id) {
     apartmentRepository.deleteById(id);
+  }
+
+
+  public Iterable<Apartment> getAvailableApt() {
+    return apartmentRepository.findApartmentsByStatus(true);
   }
 }

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0">
+    <title>Dream appartment</title>
+</head>
+<body>
+<h1>Dream appartment</h1>
+
+<h2>Registrera lägenhet:</h2>
+<form method="get" action="jdbc:mysql://localhost:3306">
+    <label>Storlek-m^2: <input type="text" name="storlek"></label>
+    <select name="dropdown">
+        <option value="kök">Kök</option>
+        <option value="kokvrå">Köksvrå</option>
+    </select>
+    <label for="antal-rum">antal rum:</label> <input type="text" id="antal-rum" name="antal-rum">
+    <label>Adress: <input type="adress" name="adress"></label>
+    <label>Lägenhetsnummer: <input type="text" name="lägenhetsnummer"></label>
+    <label>Hyra: <input type="text" name="hyra"></label>
+
+    <button type="submit">Skicka</button>
+<h2>Registrera hyresgäst</h2>
+</form>
+<form method="get" action="jdbc:mysql://localhost:3306">
+    <label>namn <input type="text" namn="namn"></label>
+    <label for="personnummer">personnummer:</label> <input type="text" id="personnummer" name="personnummer">
+    <label>E-mail: <input type="text" name="e-mail"></label>
+    <label>Faktureringsadress: <input type="text" name="faktureringsadress"></label>
+
+    <button type="submit">Skicka</button>
+</form>
+
+</body>
+</html>
+

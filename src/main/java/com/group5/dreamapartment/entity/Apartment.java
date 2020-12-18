@@ -67,13 +67,7 @@ public class Apartment {
     this.rent = rent;
   }
 
-  public boolean isAvailble() {
-    return availble;
-  }
 
-  public void setAvailble(boolean availble) {
-    this.availble = availble;
-  }
 
   public String getDescription() {
     return description;
@@ -95,8 +89,17 @@ public class Apartment {
     private int apartmentNumber;
   @Column
    private int rent;
-  @Column
-   private boolean availble;
+
+  public boolean isStatus() {
+    return status;
+  }
+
+  public void setStatus(boolean status) {
+    this.status = status;
+  }
+
+  @Column(nullable = false)
+   private boolean status;
   @Column
   private String description;
   }

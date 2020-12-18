@@ -19,15 +19,15 @@ public class ApartmentController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public String create(@RequestParam String address, @RequestParam int apartmentNumber,
-                       @RequestParam boolean availble, @RequestParam String kitchentype,
+                       @RequestParam boolean status, @RequestParam String kitchentype,
                        @RequestParam int rent, @RequestParam Byte rooms,
                        @RequestParam int size, @RequestParam String description ) {
 
-    aptService.create(address, apartmentNumber, availble, kitchentype, rent, rooms, size, description);
+    aptService.create(address, apartmentNumber, status, kitchentype, rent, rooms, size, description);
     return "Size " + size + " Description " + description +
         " Address " + address + " Rooms " + rooms +
         " Kitchentype " + kitchentype + " Rent " + rent +
-        " Availble " + availble + " Apartment number " + apartmentNumber;
+        " Status " + status + " Apartment number " + apartmentNumber;
   }
 
   @GetMapping
@@ -35,6 +35,10 @@ public class ApartmentController {
     return aptService.getAll();
   }
 
+  @GetMapping(value = "/status")
+  public Iterable<Apartment> getAvailableApartments() {
+    return aptService.getAvailableApt();
+  }
   @DeleteMapping(value = "/{id}")
   public ResponseEntity<?> delete(@PathVariable("id") Long id) {
     try {
