@@ -26,21 +26,26 @@ public class ApartmentController {
   @ResponseStatus(HttpStatus.CREATED)
   public String create(@RequestParam String street, @RequestParam String city, @RequestParam String zipCode,
                        @RequestParam String country, @RequestParam int apartmentNumber,
-                       @RequestParam boolean availble, @RequestParam String kitchentype,
+                       @RequestParam boolean status, @RequestParam String kitchentype,
                        @RequestParam int rent, @RequestParam Byte rooms,
                        @RequestParam int size, @RequestParam String description ) {
 
     Address address = addressService.create(street, city, zipCode, country);
-    aptService.create(address, apartmentNumber, availble, kitchentype, rent, rooms, size, description);
-    return "Size: " + size + " Description: " + description +
+    aptService.create(address, apartmentNumber, status, kitchentype, rent, rooms, size, description);
+    return "Size: " + size + "Kvm" + " Description: " + description +
         " Address: " + address + " Rooms: " + rooms +
         " Kitchentype: " + kitchentype + " Rent: " + rent +
-        " Available: " + availble + " Apartment number: " + apartmentNumber;
+        " Status: " + status + " Apartment number: " + apartmentNumber;
   }
 
   @GetMapping
   public Iterable<Apartment> getAll() {
     return aptService.getAll();
+  }
+
+  @GetMapping(value = "/status")
+  public Iterable<Apartment> getAvailableApartments() {
+    return aptService.getAvailableApt();
   }
 
   @DeleteMapping(value = "/{id}")

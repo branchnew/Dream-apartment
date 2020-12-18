@@ -1,6 +1,7 @@
 package com.group5.dreamapartment.controller;
 
 import com.group5.dreamapartment.entity.Address;
+import com.group5.dreamapartment.entity.Apartment;
 import com.group5.dreamapartment.entity.Renter;
 import com.group5.dreamapartment.service.AddressService;
 import com.group5.dreamapartment.service.RenterService;
@@ -52,7 +53,15 @@ public class RenterController {
       return renterService.getAll();
     }
 
-    @DeleteMapping(value = "/{id}")
+    /*@PutMapping()
+    public Renter assignAptToRenter(@RequestParam Long aptId, @RequestParam Long renterId) {
+      if(){
+
+      }
+    }*/
+
+
+  @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
       try {
         renterService.deleteById(id);
