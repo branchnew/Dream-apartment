@@ -1,12 +1,15 @@
 package com.group5.dreamapartment.entity;
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sun.istack.Nullable;
-
 import javax.persistence.*;
 
 @Entity
 @Table
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id")
 public class Renter {
 
     @Id
@@ -77,7 +80,7 @@ public class Renter {
       return apartment;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn()
     @Nullable
     private Apartment apartment;

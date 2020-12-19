@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface ApartmentRepository extends PagingAndSortingRepository<Apartment, Long > {
-  List<Apartment> findApartmentsByStatus(boolean available);
+  List<Apartment> findApartmentsByRenterIsNull();
+  List<Apartment> findApartmentsByRenterIsNotNull();
   Apartment findApartmentById(Long id);
 }

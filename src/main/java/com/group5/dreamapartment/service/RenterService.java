@@ -44,8 +44,8 @@ public class RenterService {
   }
 
   public void assignAptToRenter(Apartment apt, Renter renter) {
-    renter.setApartment(apt);
-    renterRepository.save(renter);
+      renter.setApartment(apt);
+      renterRepository.save(renter);
   }
 
   public Renter findRenter(Long renterID) {

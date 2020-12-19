@@ -51,17 +51,17 @@ public class RenterController {
             " Address: " + address + " Invoice address: " + invoiceAddress;
     }
 
-    @GetMapping
-    public Iterable<Renter> getAll() {
-      return renterService.getAll();
-    }
+  @GetMapping
+  public Iterable<Renter> getAll() {
+    return renterService.getAll();
+  }
 
-    @PutMapping()
-    public void aptToRenter(@RequestParam Long aptId, @RequestParam Long renterId) {
-      Apartment apt = aptService.findApt(aptId);
-      Renter renter = renterService.findRenter(renterId);
-      renterService.assignAptToRenter(apt, renter);
-    }
+  @PutMapping()
+  public void aptToRenter(@RequestParam Long aptId, @RequestParam Long renterId) {
+    Apartment apt = aptService.findApt(aptId);
+    Renter renter = renterService.findRenter(renterId);
+    renterService.assignAptToRenter(apt, renter);
+  }
 
   @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
@@ -73,4 +73,4 @@ public class RenterController {
       }
     }
 
-  }
+}

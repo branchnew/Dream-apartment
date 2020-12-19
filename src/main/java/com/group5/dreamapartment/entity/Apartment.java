@@ -1,9 +1,17 @@
 package com.group5.dreamapartment.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity
 @Table
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id")
 public class Apartment {
 
   @Id
@@ -66,14 +74,6 @@ public class Apartment {
     this.rent = rent;
   }
 
-  public boolean isStatus() {
-    return status;
-  }
-
-  public void setStatus(boolean status) {
-    this.status = status;
-  }
-
   public String getDescription() {
     return description;
   }
@@ -96,8 +96,6 @@ public class Apartment {
   @Column
    private int rent;
   @Column
-   private boolean status;
-  @Column
   private String description;
 
   public Renter getRenter() {
@@ -108,7 +106,7 @@ public class Apartment {
     this.renter = renter;
   }
 
-  @OneToOne()
+  @OneToOne(mappedBy = "apartment")
   private Renter renter;
   }
 

@@ -26,16 +26,15 @@ public class ApartmentController {
   @ResponseStatus(HttpStatus.CREATED)
   public String create(@RequestParam String street, @RequestParam String city, @RequestParam String zipCode,
                        @RequestParam String country, @RequestParam int apartmentNumber,
-                       @RequestParam boolean status, @RequestParam String kitchentype,
-                       @RequestParam int rent, @RequestParam Byte rooms,
+                       @RequestParam String kitchentype, @RequestParam int rent, @RequestParam Byte rooms,
                        @RequestParam int size, @RequestParam String description ) {
 
     Address address = addressService.create(street, city, zipCode, country);
-    aptService.create(address, apartmentNumber, status, kitchentype, rent, rooms, size, description);
+    aptService.create(address, apartmentNumber, kitchentype, rent, rooms, size, description);
     return "Size: " + size + "Kvm" + " Description: " + description +
         " Address: " + address + " Rooms: " + rooms +
         " Kitchentype: " + kitchentype + " Rent: " + rent +
-        " Status: " + status + " Apartment number: " + apartmentNumber;
+        " Apartment number: " + apartmentNumber;
   }
 
   @GetMapping
@@ -43,10 +42,16 @@ public class ApartmentController {
     return aptService.getAll();
   }
 
-  @GetMapping(value = "/status")
+  @GetMapping(value = "/available")
   public Iterable<Apartment> getAvailableApartments() {
     return aptService.getAvailableApt();
   }
+
+  @GetMapping(value = "/occupied")
+  public Iterable<Apartment> getOccupiedApartments() {
+    return aptService.getOccupiedApt();
+  }
+
 
   @DeleteMapping(value = "/{id}")
   public ResponseEntity<?> delete(@PathVariable("id") Long id) {
