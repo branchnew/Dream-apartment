@@ -39,13 +39,35 @@ function sendInfoRenter(){
   ;// Create a text node
 
   const button = document.createElement('button'); // create a remove button
-  button.innerHTML = 'Delete';
-  button.onclick = () =>{  //Function that removes a li
+  button.innerHTML = 'Ta Bort';
+
+  //Function that removes a li
+  button.onclick = () =>{
     li.remove()
+  }
+  const addRenterButton = document.createElement("button");
+  addRenterButton.innerHTML = 'Lägg till hyresgäst'
+  const submit = document.createElement("button")
+
+  //Function to add Renter
+  addRenterButton.onclick = () => {
+    var input = document.createElement("input")
+    const submit = document.createElement("button")
+    submit.innerHTML = "Klar";
+    li.appendChild(input)
+    li.appendChild(submit)
+    submit.onclick = () => {
+      if (input.value === "Henrik Möller"){
+        var renter = document.createTextNode(input.value);
+        li.appendChild(renter);
+      }
+    }
   }
 
   li.appendChild(sum) // Append the text to <li>
   li.appendChild(button) // append the button to <li>
+  li.appendChild(addRenterButton) // append the button to <li>
+
   RenterList.appendChild(li) // Append <li> to <ul> with id="myList"
 }
 
