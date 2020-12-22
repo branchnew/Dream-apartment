@@ -12,8 +12,8 @@
 <h1>Dream appartment</h1>
 
 <h2>Registrera lägenhet:</h2>
-<form method="get" action="jdbc:mysql://localhost:3306"><br>
-    <label>storlek-m^2: <input type="text" name="storlek"></label><br>
+<form class="Lägenhetsform" method="POST" action="jdbc:mysql://localhost:3306"><br>
+    <label>storlek-m^2: <input type="text" id="storlek"></label><br>
     <select name="dropdown">
         <option value="kök">kök</option>
         <option value="kokvrå">Köksvrå</option>
@@ -21,25 +21,31 @@
 
     <label for="antal-rum">antal rum:</label> <input type="text" id="antal-rum" name="antal-rum">
     <br>
-    <label>adress: <input type="adress" name="adress"></label>
+    <label>adress: <input type="adress" id="adress"></label>
     <br>
-    <label>lägenhetsnummer: <input type="text" name="lägenhetsnummer"></label>
+    <label>lägenhetsnummer: <input type="text" id="lägenhetsnummer"></label>
     <br>
-    <label>hyra: <input type="text" name="hyra"></label>
+    <label>hyra: <input type="text" id="hyra"></label>
     <br>
-    <button type="submit">Skicka</button>
+    <button id="send" onclick="sendInfoLgh()" type="button">Skicka</button>
     <br>
+    <div>
+    <ul id="LghList"></ul>
+    </div>
     <br>
 </form><br>
 <h2>Registrera hyresgäst:</h2>
-<form method="get" action="jdbc:mysql://localhost:3306"><br>
-    <label>namn <input type="text" namn="namn"></label><br>
-    <label for="personnummer">personnummer:</label> <input type="text" id="personnummer" name="personnummer"><br>
-    <label for="telefonnummer">telefonnummer:</label> <input type="text" id="telefonnummer" name="telefonnummer"><br>
-    <label>e-mail: <input type="text" name="e-mail"></label><br>
-    <label>faktureringsadress: <input type="text" name="faktureringsadress"></label><br>
+<form class="hyresgästsform" method="POST" action="jdbc:mysql://localhost:3306"><br>
+    <label>namn <input type="text" id="namn"></label><br>
+    <label for="personnummer">personnummer:</label> <input type="text" id="personnummer" id="personnummer"><br>
+    <label for="telefonnummer">telefonnummer:</label> <input type="text" id="telefonnummer" id="telefonnummer"><br>
+    <label>e-mail: <input type="text" id="e-mail"></label><br>
+    <label>faktureringsadress: <input type="text" id="faktureringsadress"></label><br>
 
-    <button type="submit">Skicka</button>
+    <button class="skickahyresgästinfo" onclick="sendInfoRenter()" type="submit">Skicka</button>
+  <div>
+    <ul id="RenterList"></ul>
+  </div>
 </form>
 
 </body>
