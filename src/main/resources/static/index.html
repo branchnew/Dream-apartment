@@ -12,8 +12,10 @@
 <h1>Dream appartment</h1>
 
 <h2>Registrera lägenhet:</h2>
+
 <form class="Lägenhetsform" method="POST" action="jdbc:mysql://localhost:3306"><br>
     <label>storlek-m^2: <input type="text" id="storlek"></label><br>
+
     <select name="dropdown">
         <option value="kök">kök</option>
         <option value="kokvrå">Köksvrå</option>
@@ -35,12 +37,14 @@
     <br>
 </form><br>
 <h2>Registrera hyresgäst:</h2>
+<<<<<<< HEAD
 <form class="hyresgästsform" method="POST" action="jdbc:mysql://localhost:3306"><br>
     <label>namn <input type="text" id="namn"></label><br>
     <label for="personnummer">personnummer:</label> <input type="text" id="personnummer" id="personnummer"><br>
     <label for="telefonnummer">telefonnummer:</label> <input type="text" id="telefonnummer" id="telefonnummer"><br>
     <label>e-mail: <input type="text" id="e-mail"></label><br>
     <label>faktureringsadress: <input type="text" id="faktureringsadress"></label><br>
+
 
     <button class="skickahyresgästinfo" onclick="sendInfoRenter()" type="submit">Skicka</button>
   <div>
