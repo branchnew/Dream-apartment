@@ -1,47 +1,54 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dream apartment</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="apartment.js" defer></script>
-
-    <title>Dream appartment</title>
-</head>
-<body>
-<h1>Dream appartment</h1>
-
-<h2>Registrera lägenhet:</h2>
-<form method="post" action="jdbc:mysql://localhost:3306"><br>
-    <label>storlek-m^2: <input type="text" name="storlek"></label><br>
-    <select name="dropdown">
-        <option value="kök">kök</option>
-        <option value="kokvrå">Köksvrå</option>
-    </select><br>
-
-    <label for="antal-rum">antal rum:</label> <input type="text" id="antal-rum" name="antal-rum">
-    <br>
-    <label>adress: <input type="adress" name="adress"></label>
-    <br>
-    <label>lägenhetsnummer: <input type="text" name="lägenhetsnummer"></label>
-    <br>
-    <label>hyra: <input type="text" name="hyra"></label>
-    <br>
-    <button type="submit">Skicka</button>
-    <br>
-    <br>
-</form><br>
-<h2>Registrera hyresgäst:</h2>
-<form method="post" action="jdbc:mysql://localhost:3306"><br>
-    <label>namn <input type="text" namn="namn"></label><br>
-    <label for="personnummer">personnummer:</label> <input type="text" id="personnummer" name="personnummer"><br>
-    <label for="telefonnummer">telefonnummer:</label> <input type="text" id="telefonnummer" name="telefonnummer"><br>
-    <label>e-mail: <input type="text" name="e-mail"></label><br>
-    <label>faktureringsadress: <input type="text" name="faktureringsadress"></label><br>
-
-    <button type="submit">Skicka</button>
-</form>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <script src="apartment.js" defer></script>
+        <title>Dream appartment</title>
+    </head>
+    <body id="wrapper">
+        <header class="header">
+            <a href="#apartment">Lägenhet</a>
+            <a href="#renter">Hyresgäst </a>
+        </header>
+        <main class="main">
+            <div class="seachfield">
+                <input type="text" placeholder="Sök lägenhetsnummer, personnummer, stad">
+            </div>
+            <div id="apartment">
+                <h2>Registrera lägenhet:</h2>
+                <form method="post" action="jdbc:mysql://localhost:3306"><br>
+                    <label>storlek-m^2: <input type="text" name="storlek"></label><br>
+                    <select name="dropdown">
+                        <option value="kök">kök</option>
+                        <option value="kokvrå">Köksvrå</option>
+                    </select><br>
+                    <label for="antal-rum">antal rum:</label> <input type="text" id="antal-rum" name="antal-rum">
+                    <br>
+                    <label>adress: <input type="adress" name="adress"></label>
+                    <br>
+                    <label>lägenhetsnummer: <input type="text" name="lägenhetsnummer"></label>
+                    <br>
+                    <label>hyra: <input type="text" name="hyra"></label>
+                    <br>
+                    <button type="submit">Skicka</button>
+                    <br>
+                    <br>
+                </form>
+            </div>
+            <div id="renter">
+                <h2>Registrera hyresgäst:</h2>
+                <form method="post" action="jdbc:mysql://localhost:3306"><br>
+                    <label>namn <input type="text" namn="namn"></label><br>
+                    <label for="personnummer">personnummer:</label> <input type="text" id="personnummer" name="personnummer"><br>
+                    <label for="telefonnummer">telefonnummer:</label> <input type="text" id="telefonnummer" name="telefonnummer"><br>
+                    <label>e-mail: <input type="text" name="e-mail"></label><br>
+                    <label>faktureringsadress: <input type="text" name="faktureringsadress"></label><br>
+                    <button type="submit">Skicka</button>
+                </form>
+            </div>
+        </main>
+        <footer class="footer"></footer>
+    </body>
 </html>
 
