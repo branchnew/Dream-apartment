@@ -1,0 +1,88 @@
+body {
+    height: 100vh;
+}
+.container {
+    font-family: "Lucida Grande";
+}
+
+.level:not(:last-child){
+    margin: 0;
+}
+
+.level {
+    margin: 0;
+    background-color: #00006d;
+}
+
+.link {
+    color: white;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.searching-input {
+    width: 1000px;
+}
+.hero {
+    background-image: url("./images/homefoto.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: opacity(30%);
+    height: 800px;
+    width: 100%;
+    padding-top: 200px;
+}
+
+.input-apartment {
+    height: 100px;
+    text-align: center;
+    border-color: #9d9d9d;
+}
+
+.input:focus {
+    box-shadow: none;
+    border-color: #e7e7e7;
+}
+
+.input::placeholder {
+    color: #000000;
+    text-align: center;
+}
+
+.input:hover {
+    border-color: #e7e7e7;
+}
+
+.icon {
+    padding-top: 350px;
+}
+
+.logo {
+    color: white;
+    font-size: 40px;
+    padding: 35px;
+}
+
+section .section {
+    font-weight: 400;
+    text-align: center;
+}
+
+.footer {
+    background-color: lightgray;
+ }
+
+@media screen and (min-width:1024px) {
+    .section.is-medium {
+        padding:0;
+    }
+    .section.is-large {
+        padding:0;
+    }
+}
+
+@media screen and (min-width:769px),print {
+    .hero.is-large .hero-body {
+        padding: 0;
+    }
+}
