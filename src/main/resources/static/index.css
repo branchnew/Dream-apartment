@@ -10,8 +10,7 @@ body {
 }
 
 .level {
-    margin: 0;
-    background-color: #00006d;
+    background-color: #014956;
 }
 
 .link {
@@ -23,12 +22,12 @@ body {
 .searching-input {
     width: 1000px;
 }
-.hero {
+.hero-background {
     background-image: url("./images/homefoto.jpg");
     background-size: cover;
     background-position: center;
     filter: opacity(30%);
-    height: 800px;
+    height: 810px;
     width: 100%;
     padding-top: 200px;
 }
@@ -68,8 +67,38 @@ section .section {
     text-align: center;
 }
 
+.renter {
+    background-color: #ffd44c;
+}
+
+.apartment {
+    background-color: #f8b37a;
+}
+
+.apartment-form {
+    padding: 150px 50px 150px 50px;
+    height: 810px;
+}
+.renter-form {
+    padding: 20px 50px 20px 50px;
+    height: 810px;
+}
+
+.textarea:not([rows]) {
+    min-height: 9em;
+}
+
+.invoice-address {
+    font-weight: 600;
+}
+
+.save-button {
+    padding-top: 35px;
+}
+
 .footer {
-    background-color: lightgray;
+    background-color: #ececec;
+    padding: 0;
  }
 
 @media screen and (min-width:1024px) {

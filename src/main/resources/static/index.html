@@ -22,27 +22,30 @@
             <a class="link">Hyresgäst</a>
         </p>
     </nav>
-    <section class="hero is-large">
+    <section class="hero-background hero is-large">
         <div class="hero-body">
             <div class="searching-input container">
-                <input class="input-apartment input is-large" type="text" placeholder="Sök lägenhet nummer, Stad, hyresgäst namn">
+                <input class="input-apartment input is-large" type="text" placeholder="Sök lägenhet nummer, Ort, hyresgäst namn">
             </div>
         </div>
     </section>
-    <section>
-        <div class="columns">
-            <div class="column is-12">
-                <div class="tile is-parent">
-                    <article class="tile notification is-info">
-                        <p class="title">Lägenhet</p>
-                    </article>
-                </div>
+    <section class="apartment hero">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Lägenhet
+                </h1>
+                <h2 class="subtitle">
+                    Lägg till en lägenhet
+                </h2>
             </div>
         </div>
+    </section>
+    <section class="apartment-form">
         <div class="columns">
-            <div class="column is-6">
+            <div class="column is-5">
                 <div class="field">
-                    <label class="label">Name</label>
+                    <label class="label">Lägenhet nummer</label>
                     <div class="control">
                         <input class="input is-medium" type="text" placeholder="">
                     </div>
@@ -50,7 +53,38 @@
             </div>
             <div class="column">
                 <div class="field ">
-                    <label class="label">Personnummer</label>
+                    <label class="label">Kök</label>
+                    <div class="select is-medium">
+                        <select>
+                            <option></option>
+                            <option>Kök</option>
+                            <option>Kokvrå</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-5">
+                <div class="field ">
+                    <label class="label">Storlek</label>
+                    <div class="control">
+                        <input class="input is-medium" type="text" placeholder="">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="columns">
+            <div class="column is-6">
+                <div class="field ">
+                    <label class="label">Rum</label>
+                    <div class="control">
+                        <input class="input is-medium" type="text" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="column is-6">
+                <div class="field ">
+                    <label class="label">Hyra</label>
                     <div class="control">
                         <input class="input is-medium" type="text" placeholder="">
                     </div>
@@ -58,27 +92,170 @@
             </div>
         </div>
         <div class="columns">
-            <div class="column is-4">
+            <div class="column is-6">
+                <div class="field">
+                    <label class="label">Adress</label>
+                    <div class="control">
+                        <input class="input is-medium" type="text" placeholder="">
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-4">
+                        <div class="field">
+                            <label class="label">Postnummer</label>
+                            <div class="control">
+                                <input class="input is-medium" type="text" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">Ort</label>
+                            <div class="control">
+                                <input class="input is-medium" type="text" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-6">
+                <div class="field">
+                    <label class="label">Beskrivning</label>
+                    <div class="control">
+                        <textarea class="textarea" placeholder=""></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="save-button">
+            <button class="button is-large is-fullwidth is-success">SPARA</button>
+        </div>
+    </section>
+    <section class="renter hero">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Hyresgäst
+                </h1>
+                <h2 class="subtitle">
+                    Lägg till en hyresgäst
+                </h2>
+            </div>
+        </div>
+    </section>
+    <section class="renter-form">
+        <div class="columns">
+            <div class="column is-7">
+                <div class="field">
+                    <label class="label">Namn</label>
+                    <div class="control">
+                        <input class="input is-medium" type="text" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="column is-5">
                 <div class="field ">
-                    <label class="label">Personnummer</label>
+                    <label class="label">personnummer</label>
                     <div class="control">
                         <input class="input is-medium" type="text" placeholder="">
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="field">
-            <label class="label">Name</label>
-            <div class="control">
-                <input class="input" type="text" placeholder="Text input">
+        <div class="columns">
+            <div class="column is-5">
+                <div class="field ">
+                    <label class="label">Mobilnummer</label>
+                    <div class="control">
+                        <input class="input is-medium" type="tel" placeholder="">
+                    </div>
+                </div>
             </div>
+            <div class="column is-7">
+                <div class="field ">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input class="input is-medium" type="email" placeholder="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-9">
+                <div class="field">
+                    <label class="label">Adress</label>
+                    <div class="control">
+                        <input class="input is-medium" type="text" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <label class="label">Postnummer</label>
+                    <div class="control">
+                        <input class="input is-medium" type="text" placeholder="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-6">
+                <div class="field">
+                    <label class="label">Ort</label>
+                    <div class="control">
+                        <input class="input is-medium" type="text" placeholder="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-6">
+                <label class="invoice-address checkbox">
+                    <input type="checkbox">
+                    Faktureringsadress
+                </label>
+            </div>
+        </div>
+        <div>
+            <div class="invoice">
+                <div class="columns">
+                    <div class="column is-9">
+                        <div class="field">
+                            <label class="label">Adress</label>
+                            <div class="control">
+                                <input class="input is-medium" type="text" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="field">
+                            <label class="label">Postnummer</label>
+                            <div class="control">
+                                <input class="input is-medium" type="text" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-6">
+                        <div class="field">
+                            <label class="label">Ort</label>
+                            <div class="control">
+                                <input class="input is-medium" type="text" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="save-button">
+            <button class="button is-large is-fullwidth is-success">SPARA</button>
         </div>
     </section>
     <footer class="footer">
         <div class="content has-text-centered">
             <p>
-                <strong>Dream apartment</strong> by Farida Chadali. The source code is licensed
+                <strong>Dream apartment</strong> by Group5. The source code is licensed
                 <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
             </p>
         </div>
