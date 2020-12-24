@@ -19,6 +19,11 @@ body {
     font-size: 20px;
 }
 
+a:hover {
+    color: white;
+    text-decoration-line: underline ;
+}
+
 .searching-input {
     width: 1000px;
 }
@@ -94,6 +99,20 @@ section .section {
 
 .save-button {
     padding-top: 35px;
+}
+
+.select select:not([multiple]) {
+    padding-right: 4.5em;
+}
+
+.select select:focus {
+    border-color: lightgray;
+    box-shadow: 0 0 0 .125em rgba(234, 234, 234, 0.25);
+}
+
+.textarea:focus {
+    border-color: lightgray;
+    box-shadow: 0 0 0 .125em rgba(233, 233, 233, 0.25);
 }
 
 .footer {
