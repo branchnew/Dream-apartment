@@ -38,12 +38,15 @@ body {
     width: 100vw;
 }
 .search-input{
-    padding: 50px 50px 0px 50px;
+    padding: 50px 50px 50px;
     align-self: center;
 }
 input{
     height: 60px;
     width: 75vw;
+}
+div{
+    display: block;
 }
 
 #apartment{

@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="style.css">
-        <script src="apartment.js" defer></script>
-        <title>Dream appartment</title>
+        <script src="JavaScript.js" defer></script>
+        <title>Dream apartment</title>
     </head>
     <body id="wrapper">
         <header class="header">
@@ -14,43 +14,42 @@
         <main class="main">
             <div class="seachfield">
                 <div class="search-input">
-                    <input type="text" placeholder="Sök lägenhetsnummer, personnummer, stad">
+                   <label><input type="text" placeholder="Sök lägenhetsnummer, personnummer, stad"></label>
                 </div>
             </div>
             <div id="apartment">
-                <h2>Registrera lägenhet:</h2>
-                <form method="post" action="jdbc:mysql://localhost:3306"><br>
-                    <label>storlek-m^2: <input type="text" name="storlek"></label><br>
-                    <select name="dropdown">
-                        <option value="kök">kök</option>
-                        <option value="kokvrå">Köksvrå</option>
-                    </select><br>
-                    <label for="antal-rum">antal rum:</label> <input type="text" id="antal-rum" name="antal-rum">
-                    <br>
-                    <label>adress: <input type="adress" name="adress"></label>
-                    <br>
-                    <label>lägenhetsnummer: <input type="text" name="lägenhetsnummer"></label>
-                    <br>
-                    <label>hyra: <input type="text" name="hyra"></label>
-                    <br>
-                    <button type="submit">Skicka</button>
-                    <br>
-                    <br>
-                </form>
+                <h3>Registrera lägenhet:</h3>
+                <form method="post">
+                        <label><input id="size" type="text" placeholder="storlek i m^2" class="vals" name="size"/></label><br>
+                        <label><input id="kitchentype" type="text" placeholder="kökstyp" class="vals" name="kitchentype" /></label><br>
+                        <label><input id="numberOfRooms" type="text" placeholder="antal rum" class="vals" name="numberOfRooms"/></label><br>
+                        <label><input id="address" type="text" placeholder="adress" class="vals" name="address"/></label><br>
+                        <label><input id="apartment Number" type="text" placeholder="lägenhetsnummer" class="vals" name="apartment Number"/></label><br>
+                        <label><input id="rent" type="text" placeholder="hyra" class="vals" name="rent"/></label><br>
+                        <input type="button" value="Submit" OnClick="array1();"/>
+                    </form>
+                <p>Registrerad lägenhet-storlek kökstyp antal_rum adress lägenhetsnummer hyra:</p>
+                <p id="temp1"></p>
+
             </div>
+
             <div id="renter">
-                <h2>Registrera hyresgäst:</h2>
-                <form method="post" action="jdbc:mysql://localhost:3306"><br>
-                    <label>namn <input type="text" namn="namn"></label><br>
-                    <label for="personnummer">personnummer:</label> <input type="text" id="personnummer" name="personnummer"><br>
-                    <label for="telefonnummer">telefonnummer:</label> <input type="text" id="telefonnummer" name="telefonnummer"><br>
-                    <label>e-mail: <input type="text" name="e-mail"></label><br>
-                    <label>faktureringsadress: <input type="text" name="faktureringsadress"></label><br>
-                    <button type="submit">Skicka</button>
-                </form>
-            </div>
-        </main>
-        <footer class="footer"></footer>
-    </body>
-</html>
+                <h3>Registrera hyresgäst</h3>
+                <!--  <form method="post" action="jdbc:mysql://localhost:3306"><br> -->
+                <form method="post"><br>
+                     <label><input type="text" placeholder="förnamn" class="vals" name="first name"></label><br>
+                     <label><input type="text" placeholder="efternamn" class="vals" name="second name"></label><br>
+                     <label><input type="number" placeholder="personnummer" class="vals" name="soc.sec. number"></label><br>
+                     <label><input type="number" placeholder="telefonnummer" class="vals" name="phone number"></label><br>
+                     <label><input type="text" placeholder="e-mail" class="vals" name="e-mail"></label><br>
+                     <label><input type="text" placeholder="faktureringsadress" class="vals" name="billing address"></label><br>
+                    <input type="button" value="Submit" OnClick="array2();"/>
+                 </form>
+                <p>Registrerad hyresgäst-förnamn efternamn personnummer telefonnummer e-mail faktureringsadress:</p>
+                <p id="temp2"></p>
+             </div>
+         </main>
+         <footer class="footer"></footer>
+     </body>
+ </html>
 
