@@ -41,6 +41,7 @@ function sendInfoLgh(){
     onSwitch = false
     }
     submit.onclick = () => {
+
         addRenterButton.style.display = "none" //hides the addRenterButton
         let renter = document.createTextNode(input.value);
         li.appendChild(renter);
@@ -49,15 +50,28 @@ function sendInfoLgh(){
       changeRenter.innerHTML = "Ändra hyresgäst"
         li.appendChild(changeRenter)
 
+      const removeRenter = document.createElement("button")
+      removeRenter.innerHTML = "Ta bort hyresgäst"
+      li.appendChild(removeRenter)
+
+      removeRenter.onclick = () => {
+        addRenterButton.style.display = "inline-block"
+        renter.remove()
+        changeRenter.remove()
+        removeRenter.remove()
+      }
+
       //Skapa en knapp som ersätter renterchild
       changeRenter.onclick = () => {
         changeRenter.style.display = "none"
+        removeRenter.style.display = "none"
         let newinput = document.createElement("input")
         li.appendChild(newinput)
         const changeRenterButton = document.createElement("button")
         changeRenterButton.innerHTML = "Tryck för att ändra"
         li.appendChild(changeRenterButton);
         changeRenterButton.onclick = () => {
+          removeRenter.style.display = "inline-block"
           let newhost = document.createTextNode(newinput.value);
           li.replaceChild(newhost,renter)
           renter = newhost
