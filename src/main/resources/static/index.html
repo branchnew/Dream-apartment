@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link rel="stylesheet" href="index.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+    <script src = "index.js" type = "text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Dream apartment</title>
 </head>
 <body class="container is-fullhd">
@@ -47,7 +48,7 @@
                 <div class="field">
                     <label class="label">Lägenhet nummer</label>
                     <div class="control">
-                        <input class="input is-medium" type="text" placeholder="">
+                        <input id="aptNumber" class="input is-medium" type="text" placeholder="">
                     </div>
                 </div>
             </div>
@@ -55,10 +56,10 @@
                 <div class="field ">
                     <label class="label">Kök</label>
                     <div class="select is-medium">
-                        <select>
+                        <select id="kitchenSelect">
                             <option></option>
-                            <option>Kök</option>
-                            <option>Kokvrå</option>
+                            <option value="Kök">Kök</option>
+                            <option value="Kokvrå">Kokvrå</option>
                         </select>
                     </div>
                 </div>
@@ -67,7 +68,7 @@
                 <div class="field ">
                     <label class="label">Storlek</label>
                     <div class="control">
-                        <input class="input is-medium" type="text" placeholder="">
+                        <input id="size" class="input is-medium" type="text" placeholder="">
                     </div>
                 </div>
             </div>
@@ -78,7 +79,7 @@
                 <div class="field ">
                     <label class="label">Rum</label>
                     <div class="control">
-                        <input class="input is-medium" type="text" placeholder="">
+                        <input id="rooms" class="input is-medium" type="text" placeholder="">
                     </div>
                 </div>
             </div>
@@ -86,7 +87,7 @@
                 <div class="field ">
                     <label class="label">Hyra</label>
                     <div class="control">
-                        <input class="input is-medium" type="text" placeholder="">
+                        <input id="rent" class="input is-medium" type="text" placeholder="">
                     </div>
                 </div>
             </div>
@@ -96,7 +97,7 @@
                 <div class="field">
                     <label class="label">Adress</label>
                     <div class="control">
-                        <input class="input is-medium" type="text" placeholder="">
+                        <input id="address" class="input is-medium" type="text" placeholder="">
                     </div>
                 </div>
                 <div class="columns">
@@ -104,7 +105,7 @@
                         <div class="field">
                             <label class="label">Postnummer</label>
                             <div class="control">
-                                <input class="input is-medium" type="text" placeholder="">
+                                <input id="zipCode" class="input is-medium" type="text" placeholder="">
                             </div>
                         </div>
                     </div>
@@ -112,7 +113,7 @@
                         <div class="field">
                             <label class="label">Ort</label>
                             <div class="control">
-                                <input class="input is-medium" type="text" placeholder="">
+                                <input id="city" class="input is-medium" type="text" placeholder="">
                             </div>
                         </div>
                     </div>
@@ -122,12 +123,12 @@
                 <div class="field">
                     <label class="label">Beskrivning</label>
                     <div class="control">
-                        <textarea class="textarea" placeholder=""></textarea>
+                        <textarea id="description" class="textarea" placeholder=""></textarea>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="save-button">
+        <div class="apt-save-button">
             <button class="button is-large is-fullwidth is-success">SPARA</button>
         </div>
     </section>
@@ -149,7 +150,7 @@
                 <div class="field">
                     <label class="label">Namn</label>
                     <div class="control">
-                        <input class="input is-medium" type="text" placeholder="">
+                        <input id="renterName" class="input is-medium" type="text" placeholder="">
                     </div>
                 </div>
             </div>
@@ -157,7 +158,7 @@
                 <div class="field ">
                     <label class="label">personnummer</label>
                     <div class="control">
-                        <input class="input is-medium" type="text" placeholder="">
+                        <input id="renterSocialNumber" class="input is-medium" type="text" placeholder="">
                     </div>
                 </div>
             </div>
@@ -167,7 +168,7 @@
                 <div class="field ">
                     <label class="label">Mobilnummer</label>
                     <div class="control">
-                        <input class="input is-medium" type="tel" placeholder="">
+                        <input id="renterMobileNumber" class="input is-medium" type="tel" placeholder="">
                     </div>
                 </div>
             </div>
@@ -175,7 +176,7 @@
                 <div class="field ">
                     <label class="label">Email</label>
                     <div class="control">
-                        <input class="input is-medium" type="email" placeholder="">
+                        <input id="renterEmail" class="input is-medium" type="email" placeholder="">
                     </div>
                 </div>
             </div>
@@ -185,7 +186,7 @@
                 <div class="field">
                     <label class="label">Adress</label>
                     <div class="control">
-                        <input class="input is-medium" type="text" placeholder="">
+                        <input id="renterAddress" class="input is-medium" type="text" placeholder="">
                     </div>
                 </div>
             </div>
@@ -193,7 +194,7 @@
                 <div class="field">
                     <label class="label">Postnummer</label>
                     <div class="control">
-                        <input class="input is-medium" type="text" placeholder="">
+                        <input id="renterZipCode" class="input is-medium" type="text" placeholder="">
                     </div>
                 </div>
             </div>
@@ -203,52 +204,50 @@
                 <div class="field">
                     <label class="label">Ort</label>
                     <div class="control">
-                        <input class="input is-medium" type="text" placeholder="">
+                        <input id="renterCity" class="input is-medium" type="text" placeholder="">
                     </div>
                 </div>
             </div>
         </div>
         <div class="columns">
             <div class="column is-6">
-                <label class="invoice-address checkbox">
-                    <input type="checkbox">
+                <label class="invoiceCheckbox checkbox">
+                    <input id="invoice-address" type="checkbox">
                     Faktureringsadress
                 </label>
             </div>
         </div>
-        <div>
-            <div class="invoice">
-                <div class="columns">
-                    <div class="column is-9">
-                        <div class="field">
-                            <label class="label">Adress</label>
-                            <div class="control">
-                                <input class="input is-medium" type="text" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-3">
-                        <div class="field">
-                            <label class="label">Postnummer</label>
-                            <div class="control">
-                                <input class="input is-medium" type="text" placeholder="">
-                            </div>
+        <div class="invoice is-hidden">
+            <div class="columns">
+                <div class="column is-9">
+                    <div class="field">
+                        <label class="label">Adress</label>
+                        <div class="control">
+                            <input id="renterInvoiceAddress" class="input is-medium" type="text" placeholder="">
                         </div>
                     </div>
                 </div>
-                <div class="columns">
-                    <div class="column is-6">
-                        <div class="field">
-                            <label class="label">Ort</label>
-                            <div class="control">
-                                <input class="input is-medium" type="text" placeholder="">
-                            </div>
+                <div class="column is-3">
+                    <div class="field">
+                        <label class="label">Postnummer</label>
+                        <div class="control">
+                            <input id="renterInvoiceZipCode" class="input is-medium" type="text" placeholder="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column is-6">
+                    <div class="field">
+                        <label class="label">Ort</label>
+                        <div class="control">
+                            <input id="renterInvoiceCity" class="input is-medium" type="text" placeholder="">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="save-button">
+        <div class="renter-save-button">
             <button class="button is-large is-fullwidth is-success">SPARA</button>
         </div>
     </section>

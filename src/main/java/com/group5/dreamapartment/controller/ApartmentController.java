@@ -11,8 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8082")
 @RequestMapping(value = "/apartment")
-
 public class ApartmentController {
   @Autowired
   private ApartmentService aptService;
@@ -31,7 +31,7 @@ public class ApartmentController {
 
     Address address = addressService.create(street, city, zipCode, country);
     aptService.create(address, apartmentNumber, kitchentype, rent, rooms, size, description);
-    return "Size: " + size + "Kvm" + " Description: " + description +
+    return "Size: " + size + " Description: " + description +
         " Address: " + address + " Rooms: " + rooms +
         " Kitchentype: " + kitchentype + " Rent: " + rent +
         " Apartment number: " + apartmentNumber;
