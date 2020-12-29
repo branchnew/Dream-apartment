@@ -44,8 +44,12 @@ public class RenterService {
   }
 
   public void assignAptToRenter(Apartment apt, Renter renter) {
+    try{
       renter.setApartment(apt);
       renterRepository.save(renter);
+    } catch (NullPointerException ex){
+      System.out.println("Something...! " + ex);
+    }
   }
 
   public Renter findRenter(Long renterID) {
