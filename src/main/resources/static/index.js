@@ -25,8 +25,50 @@ aptButton.onclick = () => {
         kitchentype: kitchenSelect.value,
         country: 'Sweden'
     }
-
+    // creates the structure of the input
+    const row = document.createElement('tr');
+    let lghNumb = document.createElement("td")
+    let lghSize = document.createElement("td")
+    let lghRoom = document.createElement("td")
+    let lghKitch = document.createElement("td")
+    let lghRent = document.createElement("td")
+    let lghAddress = document.createElement("td")
+    let lghDescription = document.createElement("td")
+    const list = document.getElementById("aptList")
+    const removebutton = document.createElement("button")
+    removebutton.innerHTML = "Delete"
+    //saves the value in a varible
+    let NumbInfo = document.createTextNode(aptNumber.value)
+    let SizeInfo = document.createTextNode(size.value)
+    let RoomInfo = document.createTextNode(rooms.value)
+    let kitchInfo = document.createTextNode(kitchenSelect.value)
+    let RentInfo = document.createTextNode(rent.value)
+    let AddressInfo = document.createTextNode(address.value)
+    let DescriptionInfo = document.createTextNode(description.value)
+    //adds value to the td(column)
+    lghNumb.appendChild(NumbInfo)
+    lghSize.appendChild(SizeInfo)
+    lghRoom.appendChild(RoomInfo)
+    lghKitch.appendChild(kitchInfo)
+    lghRent.appendChild(RentInfo)
+    lghAddress.appendChild(AddressInfo)
+    lghDescription.appendChild(DescriptionInfo)
+    //adds the td(columns) to the row
+    row.appendChild(lghNumb)
+    row.appendChild(lghSize)
+    row.appendChild(lghRoom)
+    row.appendChild(lghKitch)
+    row.appendChild(lghRent)
+    row.appendChild(lghAddress)
+    row.appendChild(lghDescription)
+    row.appendChild(removebutton)
+    //adds the row to the list
+    list.appendChild(row)
     apartments.push(apartment);
+    //function that removes the row
+    removebutton.onclick = () =>{
+      row.remove()
+    }
 
     aptNumber.value = '',
     size.value = '',
@@ -117,10 +159,48 @@ renterButton.onclick = () => {
         invoiceCity: invoiceCity.value,
         invoiceCountry: 'Sweden'
     }
-
+  // creates the structure of the input
+  const newRow = document.createElement('tr');
+  let rName = document.createElement("td")
+  let rSecNumber = document.createElement("td")
+  let rMobileNumber = document.createElement("td")
+  let rEmail = document.createElement("td")
+  let rAddress = document.createElement("td")
+  let rInvoiceAddress = document.createElement("td")
+  const list = document.getElementById("renterList")
+  const removebutton = document.createElement("button")
+  removebutton.innerHTML = "Delete"
+  //saves the value in a varible
+  let nameInfo = document.createTextNode(namn.value)
+  let secNumberInfo = document.createTextNode(socialNumber.value)
+  let mobileInfo = document.createTextNode(mobileNumber.value)
+  let emailInfo = document.createTextNode(email.value)
+  let addressInfo = document.createTextNode(renterAddress.value)
+  let invoiceAddressInfo = document.createTextNode(invoiceAddress.value)
+  //adds value to the td(column)
+  rName.appendChild(nameInfo)
+  rSecNumber.appendChild(secNumberInfo)
+  rMobileNumber.appendChild(mobileInfo)
+  rEmail.appendChild(emailInfo)
+  rAddress.appendChild(addressInfo)
+  rInvoiceAddress.appendChild(invoiceAddressInfo)
+  //adds the td(columns) to the row
+  newRow.appendChild(rName)
+  newRow.appendChild(rSecNumber)
+  newRow.appendChild(rMobileNumber)
+  newRow.appendChild(rEmail)
+  newRow.appendChild(rAddress)
+  newRow.appendChild(rInvoiceAddress)
+  newRow.appendChild(removebutton)
+  //adds the row to the list
+  list.appendChild(newRow)
+  //function that removes the row
+  removebutton.onclick = () =>{
+    newRow.remove()
+  }
     renters.push(renter);
 
-    name.value = '',
+    namn.value = '',
     socialNumber.value = '',
     mobileNumber.value = '',
     email.value = '',
