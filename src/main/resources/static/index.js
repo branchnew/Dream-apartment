@@ -8,6 +8,7 @@ let zipCode = document.querySelector('#zipCode');
 let description = document.querySelector('#description');
 let kitchenSelect = document.querySelector('#kitchenSelect');
 const aptButton = document.querySelector('.apt-save-button');
+
 let apartments = [];
 let renters = [];
 
@@ -35,7 +36,7 @@ aptButton.onclick = () => {
     zipCode.value = '',
     city.value = '',
     description.value = '',
-    kitchenSelect.value = ''
+    kitchenSelect.value = '';
 
     const params = new URLSearchParams(apartment).toString();
     axios.post('/apartment', params,
@@ -50,7 +51,40 @@ aptButton.onclick = () => {
         .catch(error => {
             console.log(error.response)
         });
+
 }
+async function getApartments() {
+    const response = await axios ({
+        url: 'http://localhost:8082/apartment',
+        method: "GET"
+    })
+
+    console.log(response.data)
+}
+getApartments();
+
+const searchInput = document.querySelector('.search-input');
+
+searchInput.onchange = () => {
+    getApartments();
+        const result = apartments.filter(apartment => apartment.renter === null);
+
+        console.log(result);
+};
+
+function generateTable(table, data) {
+    for (let element of data) {
+        let row = table.insertRow();
+        for (key in element) {
+            let cell = row.insertCell();
+            let text = document.createTextNode(element[key]);
+            cell.appendChild(text);
+        }
+    }
+}
+
+let table = document.querySelector(".apt-table");
+generateTable(table, apartments);
 
 let namn = document.querySelector('#renterName');
 let socialNumber = document.querySelector('#renterSocialNumber');
@@ -128,27 +162,3 @@ invoiceCheckbox.onclick = () => {
 invoiceCheckingBox();
 
 
-
-
-/*
-api.getAll = async () => {
-    const response = await fetch('http://localhost:8082/apartment');
-    return await response.json();
-};
-
-api.create = async () => {
-    const data = new URLSearchParams();
-    data.append('apartmentNumber', aptNumber, 'size', size,
-        'street', address, 'city', city, 'zipCode', zipCode, 'rent', rent,
-        'rooms', rooms, 'description', description, 'kitchenType', kitchenSelect);
-
-      const result = await fetch('http://localhost:8082/apartment', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded',
-                    'Access-Control-Allow-Origin': '*'},
-            body: formatData.toString()
-        });
-
-        return result.id;
-
-};*/
