@@ -204,7 +204,7 @@ renterButton.onclick = () => {
   //function that removes the row
   removebutton.onclick = () =>{
     newRow.remove()
-    axios.delete('/apartment/{id}',{
+    axios.delete('/renter/{id}',{
       headers:{ 'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       },data: {
