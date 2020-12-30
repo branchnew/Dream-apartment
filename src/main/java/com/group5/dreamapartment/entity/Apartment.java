@@ -1,14 +1,21 @@
 package com.group5.dreamapartment.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity
 @Table
-
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id")
 public class Apartment {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   public Long getId() {
@@ -43,11 +50,11 @@ public class Apartment {
     this.kitchentype = kitchentype;
   }
 
-  public String getAddress() {
+  public Address getAddress() {
     return address;
   }
 
-  public void setAddress(String address) {
+  public void setAddress(Address address) {
     this.address = address;
   }
 
@@ -67,14 +74,6 @@ public class Apartment {
     this.rent = rent;
   }
 
-  public boolean isAvailble() {
-    return availble;
-  }
-
-  public void setAvailble(boolean availble) {
-    this.availble = availble;
-  }
-
   public String getDescription() {
     return description;
   }
@@ -89,15 +88,25 @@ public class Apartment {
     private Byte rooms;
   @Column
     private String kitchentype;
-  @Column
-    private String address;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn()
+    private Address address;
   @Column
     private int apartmentNumber;
   @Column
    private int rent;
   @Column
-   private boolean availble;
-  @Column
   private String description;
+
+  public Renter getRenter() {
+    return renter;
+  }
+
+  public void setRenter(Renter renter) {
+    this.renter = renter;
+  }
+
+  @OneToOne(mappedBy = "apartment")
+  private Renter renter;
   }
 
