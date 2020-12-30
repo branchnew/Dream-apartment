@@ -9,6 +9,11 @@ let description = document.querySelector('#description');
 let kitchenSelect = document.querySelector('#kitchenSelect');
 const aptButton = document.querySelector('.apt-save-button');
 const searchInput = document.querySelector('.search-input');
+const aptTbl = document.querySelector(".apt-table");
+const aptTblBody = document.querySelector(".apt-body");
+const rntTblBody = document.querySelector(".renter-body");
+const rntTbl = document.querySelector(".renter-table");
+
 
 let apartments = [];
 let renters = [];
@@ -57,17 +62,34 @@ aptButton.onclick = () => {
 }
 
 searchInput.onchange = () => {
-    console.log(filterByAptNumber());
-    console.log(filterByCity());
-    console.log(filterBySocialNumber());
+    filterByAptNumber();
+    filterByCity();
+    filterBySocialNumber();
+}
 
-    const tbl = document.querySelector(".apt-table");
-    const tblBody = document.querySelector(".apt-body");
+const filterByCity = () => {
+    const aprts =  apartments.filter((apartment) => {
+        if (apartment.renter === null){
+            return apartment.address.city.toLowerCase().indexOf(searchInput.value.toLowerCase()) !== -1
+        }
+    })
+    return generateAptTbl(aprts);
+}
 
+const filterByAptNumber = () => {
+    const aparts =apartments.filter(apartment => apartment.apartmentNumber == searchInput.value);
+    return generateAptTbl(aparts);
+}
+
+const filterBySocialNumber = () => {
+    const apts = renters.filter(renter => renter.socialSecNumber == searchInput.value);
+    return generateRntTbl(apts);
+}
+
+const generateAptTbl = (apartments) => {
     apartments.forEach(a => {
-
         const row = document.createElement("tr");
-
+        row.classList.add('apt-row');
         [
             a.apartmentNumber,
             a.size,
@@ -81,27 +103,53 @@ searchInput.onchange = () => {
             const node = document.createTextNode(text);
             cell.appendChild(node);
             row.appendChild(cell);
+
         })
-        tblBody.appendChild(row);
+        const deleteAptButton = document.createElement('button');
+        const cell = document.createElement("td");
+        deleteAptButton.innerHTML= 'Delete';
+        deleteAptButton.classList.add('button', 'is-danger', 'is-outlined');
+        cell.appendChild(deleteAptButton);
+        row.appendChild(cell);
+        aptTblBody.appendChild(row);
     });
-    tbl.appendChild(tblBody);
+    aptTbl.appendChild(aptTblBody);
 }
 
-const filterByCity = () => {
-    return apartments.filter((apartment) => {
-        if (apartment.renter === null){
-            return apartment.address.city.toLowerCase().indexOf(searchInput.value.toLowerCase()) !== -1
-        }
-    })
+const deleteAptButton = document.querySelector('.button');
+const aptRow = document.querySelector('.apt-row');
+deleteAptButton.onclick = () => {
+    aptTblBody.removeChild(aptRow);
 }
 
-const filterByAptNumber = () => {
-    return apartments.filter(apartment => apartment.apartmentNumber == searchInput.value);
+const generateRntTbl = (renters) => {
+    renters.forEach(r => {
+        const row = document.createElement("tr");
+        [
+            r.name,
+            r.socialSecNumber,
+            r.telNumber,
+            r.email,
+            `${r.address.street} ${r.address.city} ${r.address.zipCode} ${r.address.country}`,
+            `${r.address.invoiceStreet} ${r.address.invoiceCity} ${r.address.invoiceZipCode} ${r.address.invoiceCountry}`
+        ].forEach(text => {
+            const cell = document.createElement("td");
+            const node = document.createTextNode(text);
+            cell.appendChild(node);
+            row.appendChild(cell);
+        })
+        const deleteRntButton = document.createElement('button');
+        const cell = document.createElement("td");
+        deleteRntButton.innerHTML= 'Delete';
+        deleteRntButton.classList.add('button', 'is-danger', 'is-outlined');
+        cell.appendChild(deleteRntButton);
+        row.appendChild(cell);
+        rntTblBody.appendChild(row);
+    });
+    rntTbl.appendChild(rntTblBody);
 }
 
-const filterBySocialNumber = () => {
-    return renters.filter(renter => renter.socialSecNumber == searchInput.value);
-}
+
 
 let namn = document.querySelector('#renterName');
 let socialNumber = document.querySelector('#renterSocialNumber');
@@ -148,7 +196,8 @@ renterButton.onclick = () => {
     invoiceZipCode.value = '',
     invoiceCity.value = ''
 
-    axios.post('/renter', renter,
+    const params = new URLSearchParams(renter).toString();
+    axios.post('/renter', params,
         {
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -201,7 +250,7 @@ getApartments().then(result => apartments = result);
 getRenters().then(result => renters = result);
 
 
-/*const deleteApartment = async id => {
+const deleteApartment = async id => {
     try {
         const res = await axios.delete(`${BASE_URL}/apartment/${id}`);
         console.log(`Deleted Todo ID: `, id);
@@ -210,4 +259,4 @@ getRenters().then(result => renters = result);
     } catch (e) {
         console.error(e);
     }
-};*/
+};
