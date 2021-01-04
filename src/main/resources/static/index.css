@@ -1,22 +1,10 @@
-body {
+html, body {
     height: 100vh;
 }
-.container {
+.container.is-fluid {
     font-family: "Lucida Grande";
-}
-
-.level:not(:last-child){
-    margin: 0;
-}
-
-.level {
-    background-color: #014956;
-}
-
-.link {
-    color: white;
-    font-weight: 400;
-    font-size: 20px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 a:hover {
@@ -24,28 +12,29 @@ a:hover {
     text-decoration-line: underline ;
 }
 
-.searching-input {
-    width: 1000px;
-}
-.hero-background {
-    background-image: url("./images/homefoto.jpg");
-    background-size: cover;
-    background-position: center;
-    filter: opacity(30%);
-    height: 100vh;
-    width: 100%;
-    padding-top: 200px;
+.search-input {
+    height: 75px;
+    text-align: center;
 }
 
-.search-input {
-    height: 100px;
-    text-align: center;
-    border-color: #9d9d9d;
+.searching-input {
+    padding: 10px 0px 0px 10px;
+}
+
+.searching-input input:focus {
+    box-shadow: inset 0 .0625em .125em #217a21;
 }
 
 .input:focus {
-    box-shadow: none;
     border-color: #e7e7e7;
+}
+
+.columns {
+    padding: 0;
+}
+
+.container {
+    padding: 10px;
 }
 
 .input::placeholder {
@@ -57,40 +46,51 @@ a:hover {
     border-color: #e7e7e7;
 }
 
-.icon {
-    padding-top: 350px;
+.hero-body {
+    padding: 0;
+}
+
+.logo h1, .logo h2 {
+    color: white;
 }
 
 .logo {
-    color: white;
-    font-size: 40px;
-    padding: 35px;
+    background-color: #0d2930;
 }
 
+.mnu {
+    padding: 0;
+    background-color: #0d2930;
+}
+
+.maincontent {
+    padding: 0;
+    height: 72vh;
+}
+
+.menu {
+    padding-left: 3vw;
+    padding-top: 40px;
+}
+
+.menu li a {
+    color: white;
+}
+
+.menu p {
+    color: #bababa;
+}
 section .section {
     font-weight: 400;
     text-align: center;
 }
 
-.renter {
-    background-color: #ffd44c;
-}
-
-.apartment {
-    background-color: #f8b37a;
-}
-
-.apartment-form {
-    padding: 150px 50px 150px 50px;
-    height: 100vh;
-}
-.renter-form {
-    padding: 100px 50px 100px 50px;
-    height: 100vh;
-}
-
 .textarea:not([rows]) {
     min-height: 9em;
+}
+
+.textarea:hover {
+    border-color: #e7e7e7;
 }
 
 .invoiceCheckbox {
@@ -119,9 +119,16 @@ section .section {
     box-shadow: 0 0 0 .125em rgba(233, 233, 233, 0.25);
 }
 
-.footer {
+.foot {
     background-color: #ececec;
+    padding: 20px;
  }
+
+.foot-text {
+    text-align: center;
+    color: white;
+    background-color: #0d2930;
+}
 
 @media screen and (min-width:1024px) {
     .section.is-medium {

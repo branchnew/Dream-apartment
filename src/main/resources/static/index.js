@@ -13,6 +13,10 @@ const aptTbl = document.querySelector(".apt-table");
 const aptTblBody = document.querySelector(".apt-body");
 const rntTblBody = document.querySelector(".renter-body");
 const rntTbl = document.querySelector(".renter-table");
+const aptForm = document.querySelector('.apartment-form');
+const rntForm = document.querySelector('.renter-form');
+const deleteAptButton = document.querySelector('.button');
+const aptRow = document.querySelector('.apt-row');
 
 
 let apartments = [];
@@ -46,6 +50,7 @@ const createApartments = () => {
         .catch(error => {
             console.log(error.response)
         });
+
 }
 
 aptButton.onclick = () => {
@@ -61,10 +66,51 @@ aptButton.onclick = () => {
     kitchenSelect.value = '';
 }
 
+const aptLink = document.querySelector('.aptLink');
+const renterLink = document.querySelector('.renterLink');
+const addAptLink = document.querySelector('.addAptLink');
+const addRntLink = document.querySelector('.addRntLink');
+
+
+aptLink.onclick = () => {
+    aptTbl.classList.remove('is-hidden');
+    aptTblBody.innerHTML = '';
+    generateAptTbl(apartments);
+    rntTbl.classList.add('is-hidden');
+    rntForm.classList.add('is-hidden');
+    aptForm.classList.add('is-hidden');
+}
+
+renterLink.onclick = () => {
+    rntTbl.classList.remove('is-hidden');
+    rntTblBody.innerHTML = '';
+    generateRntTbl(renters);
+    rntTbl.removeAttribute('tbody');
+    aptTbl.classList.add('is-hidden');
+    rntForm.classList.add('is-hidden');
+    aptForm.classList.add('is-hidden');
+}
+
+addAptLink.onclick = () => {
+    aptForm.classList.remove('is-hidden');
+    rntForm.classList.add('is-hidden');
+    rntTbl.classList.add('is-hidden');
+    aptTbl.classList.add('is-hidden');
+}
+
+addRntLink.onclick = () => {
+    rntForm.classList.remove('is-hidden');
+    aptForm.classList.add('is-hidden');
+    rntTbl.classList.add('is-hidden');
+    aptTbl.classList.add('is-hidden');
+}
+
+
 searchInput.onchange = () => {
     filterByAptNumber();
     filterByCity();
     filterBySocialNumber();
+    searchInput.value = '';
 }
 
 const filterByCity = () => {
@@ -112,15 +158,16 @@ const generateAptTbl = (apartments) => {
         cell.appendChild(deleteAptButton);
         row.appendChild(cell);
         aptTblBody.appendChild(row);
+
+        deleteAptButton.onclick = () => {
+            deleteApartment(a.id);
+            aptTblBody.removeChild(row);
+        }
     });
     aptTbl.appendChild(aptTblBody);
 }
 
-const deleteAptButton = document.querySelector('.button');
-const aptRow = document.querySelector('.apt-row');
-deleteAptButton.onclick = () => {
-    aptTblBody.removeChild(aptRow);
-}
+
 
 const generateRntTbl = (renters) => {
     renters.forEach(r => {
@@ -250,13 +297,16 @@ getApartments().then(result => apartments = result);
 getRenters().then(result => renters = result);
 
 
-const deleteApartment = async id => {
+const deleteApartment = async (id) => {
+    const BASE_URL = '';
     try {
         const res = await axios.delete(`${BASE_URL}/apartment/${id}`);
-        console.log(`Deleted Todo ID: `, id);
+        console.log(`Deleted apartment ID: `, id);
 
         return res.data;
     } catch (e) {
         console.error(e);
     }
 };
+
+

@@ -11,27 +11,72 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Dream apartment</title>
 </head>
-<body class="container is-fullhd">
-    <nav class="navmenu level">
-        <p class="level-item has-text-centered">
-            <span class="logo">Dream apartment</span>
-        </p>
-        <p class="level-item has-text-centered">
-            <a href="#aptform" class="link">Lägenhet</a>
-        </p>
-        <p class="level-item has-text-centered">
-            <a href="#renterform" class="link">Hyresgäst</a>
-        </p>
-    </nav>
-    <section class="hero-background hero is-large">
-        <div class="hero-body">
-            <div class="searching-input container">
-                <input class="search-input input is-large" type="text" placeholder="Sök lght nummer, Ort, Personnummer">
-            </div>
+<body>
+    <div class="columns">
+        <div class="logo column is-2">
+            <section class="hero">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">
+                            Dream:Home
+                        </h1>
+                        <h2 class="subtitle">
+                            Dashboard
+                        </h2>
+                    </div>
+                </div>
+            </section>
         </div>
-        <div class="">
-            <table class="apt-table table">
-                <thead>
+        <div class="column">
+            <nav class="level">
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">Lediga</p>
+                        <p class="title">3,456</p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">Upptagna</p>
+                        <p class="title">123</p>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="mnu column is-2">
+            <aside class="menu">
+                <p class="menu-label">
+                    Allmän
+                </p>
+                <ul class="menu-list">
+                    <li><a class="aptLink">Lägenhet</a></li>
+                    <li><a class="renterLink">Hyresgäst</a></li>
+                </ul>
+                <p class="menu-label">
+                    Verktyg
+                </p>
+                <ul class=" menu-list">
+                    <li><a class="addAptLink">Lägg till lägenhet</a></li>
+                    <li><a class="addRntLink">Lägg till hyresgäst</a></li>
+                    <li><a>Lägenhet beskrivning</a></li>
+
+                </ul>
+                <div class="foot-text is-2">
+                    <strong style="color: white">Dream:Home</strong> by Group5. The source code is licensed
+                    <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+                </div>
+            </aside>
+        </div>
+
+        <div class="maincontent column">
+            <div class="searching-input column is-4">
+                <input class="search-input input" type="text" placeholder="Sök lght nummer, Ort, Personnummer">
+            </div>
+            <div class="column">
+                <table class="apt-table table is-striped is-hidden">
+                    <thead>
                     <tr>
                         <th>Lght nummer</th>
                         <th>Storlek</th>
@@ -41,260 +86,228 @@
                         <th>Address</th>
                         <th>Beskrivning</th>
                     </tr>
-                </thead>
-                <tbody class="apt-body">
+                    </thead>
+                    <tbody class="apt-body">
 
-                </tbody>
-            </table>
-        </div>
-        <div class="">
-            <table class="renter-table table">
-                <thead>
-                <tr>
-                    <th>Namn</th>
-                    <th>Personnummer</th>
-                    <th>Mobilnummer</th>
-                    <th>Email</th>
-                    <th>Adress</th>
-                    <th>Fakturerings adress</th>
-                </tr>
-                </thead>
-                <tbody class="renter-body"></tbody>
-            </table>
-        </div>
-    </section>
-<div id="aptform">
-    <section class="apartment hero">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    Lägenhet
-                </h1>
-                <h2 class="subtitle">
-                    Lägg till en lägenhet
-                </h2>
-            </div>
-        </div>
-    </section>
-    <section class="apartment-form">
-        <div class="columns">
-            <div class="column is-5">
-                <div class="field">
-                    <label class="label">Lägenhet nummer</label>
-                    <div class="control">
-                        <input id="aptNumber" class="input is-medium" type="text" placeholder="">
-                    </div>
-                </div>
+                    </tbody>
+                </table>
             </div>
             <div class="column">
-                <div class="field ">
-                    <label class="label">Kök</label>
-                    <div class="select is-medium">
-                        <select id="kitchenSelect">
-                            <option></option>
-                            <option value="Kök">Kök</option>
-                            <option value="Kokvrå">Kokvrå</option>
-                        </select>
-                    </div>
-                </div>
+                <table class="renter-table is-hidden table is-striped">
+                    <thead>
+                    <tr>
+                        <th>Namn</th>
+                        <th>Personnummer</th>
+                        <th>Mobilnummer</th>
+                        <th>Email</th>
+                        <th>Adress</th>
+                        <th>Fakturerings adress</th>
+                    </tr>
+                    </thead>
+                    <tbody class="renter-body"></tbody>
+                </table>
             </div>
-            <div class="column is-5">
-                <div class="field ">
-                    <label class="label">Storlek</label>
-                    <div class="control">
-                        <input id="size" class="input is-medium" type="text" placeholder="">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="columns">
-            <div class="column is-6">
-                <div class="field ">
-                    <label class="label">Rum</label>
-                    <div class="control">
-                        <input id="rooms" class="input is-medium" type="text" placeholder="">
-                    </div>
-                </div>
-            </div>
-            <div class="column is-6">
-                <div class="field ">
-                    <label class="label">Hyra</label>
-                    <div class="control">
-                        <input id="rent" class="input is-medium" type="text" placeholder="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column is-6">
-                <div class="field">
-                    <label class="label">Adress</label>
-                    <div class="control">
-                        <input id="address" class="input is-medium" type="text" placeholder="">
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column is-4">
-                        <div class="field">
-                            <label class="label">Postnummer</label>
-                            <div class="control">
-                                <input id="zipCode" class="input is-medium" type="text" placeholder="">
+            <div class="column">
+                <section class="apartment-form is-hidden">
+                    <div class="columns">
+                        <div class="column is-5">
+                            <div class="field">
+                                <label class="label">Lägenhet nummer</label>
+                                <div class="control">
+                                    <input id="aptNumber" class="input is-medium" type="text" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field ">
+                                <label class="label">Kök</label>
+                                <div class="select is-medium">
+                                    <select id="kitchenSelect">
+                                        <option></option>
+                                        <option value="Kök">Kök</option>
+                                        <option value="Kokvrå">Kokvrå</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-5">
+                            <div class="field ">
+                                <label class="label">Storlek</label>
+                                <div class="control">
+                                    <input id="size" class="input is-medium" type="text" placeholder="">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="column">
-                        <div class="field">
-                            <label class="label">Ort</label>
-                            <div class="control">
-                                <input id="city" class="input is-medium" type="text" placeholder="">
+                    <div class="columns">
+                        <div class="column is-6">
+                            <div class="field ">
+                                <label class="label">Rum</label>
+                                <div class="control">
+                                    <input id="rooms" class="input is-medium" type="text" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-6">
+                            <div class="field ">
+                                <label class="label">Hyra</label>
+                                <div class="control">
+                                    <input id="rent" class="input is-medium" type="text" placeholder="">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="column is-6">
-                <div class="field">
-                    <label class="label">Beskrivning</label>
-                    <div class="control">
-                        <textarea id="description" class="textarea" placeholder=""></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="apt-save-button">
-            <button class="button is-large is-fullwidth is-success">SPARA</button>
-        </div>
-    </section>
-</div>
-<div id="renterform">
-    <section class="renter hero">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    Hyresgäst
-                </h1>
-                <h2 class="subtitle">
-                    Lägg till en hyresgäst
-                </h2>
-            </div>
-        </div>
-    </section>
-    <section class="renter-form">
-        <div class="columns">
-            <div class="column is-7">
-                <div class="field">
-                    <label class="label">Namn</label>
-                    <div class="control">
-                        <input id="renterName" class="input is-medium" type="text" placeholder="">
-                    </div>
-                </div>
-            </div>
-            <div class="column is-5">
-                <div class="field ">
-                    <label class="label">personnummer</label>
-                    <div class="control">
-                        <input id="renterSocialNumber" class="input is-medium" type="text" placeholder="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column is-5">
-                <div class="field ">
-                    <label class="label">Mobilnummer</label>
-                    <div class="control">
-                        <input id="renterMobileNumber" class="input is-medium" type="tel" placeholder="">
-                    </div>
-                </div>
-            </div>
-            <div class="column is-7">
-                <div class="field ">
-                    <label class="label">Email</label>
-                    <div class="control">
-                        <input id="renterEmail" class="input is-medium" type="email" placeholder="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column is-9">
-                <div class="field">
-                    <label class="label">Adress</label>
-                    <div class="control">
-                        <input id="renterAddress" class="input is-medium" type="text" placeholder="">
-                    </div>
-                </div>
-            </div>
-            <div class="column is-3">
-                <div class="field">
-                    <label class="label">Postnummer</label>
-                    <div class="control">
-                        <input id="renterZipCode" class="input is-medium" type="text" placeholder="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column is-6">
-                <div class="field">
-                    <label class="label">Ort</label>
-                    <div class="control">
-                        <input id="renterCity" class="input is-medium" type="text" placeholder="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column is-6">
-                <label class="invoiceCheckbox checkbox">
-                    <input id="invoice-address" type="checkbox">
-                    Faktureringsadress
-                </label>
-            </div>
-        </div>
-        <div class="invoice is-hidden">
-            <div class="columns">
-                <div class="column is-9">
-                    <div class="field">
-                        <label class="label">Adress</label>
-                        <div class="control">
-                            <input id="renterInvoiceAddress" class="input is-medium" type="text" placeholder="">
+                    <div class="columns">
+                        <div class="column is-6">
+                            <div class="field">
+                                <label class="label">Adress</label>
+                                <div class="control">
+                                    <input id="address" class="input is-medium" type="text" placeholder="">
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="column is-4">
+                                    <div class="field">
+                                        <label class="label">Postnummer</label>
+                                        <div class="control">
+                                            <input id="zipCode" class="input is-medium" type="text" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Ort</label>
+                                        <div class="control">
+                                            <input id="city" class="input is-medium" type="text" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-6">
+                            <div class="field">
+                                <label class="label">Beskrivning</label>
+                                <div class="control">
+                                    <textarea id="description" class="textarea" placeholder=""></textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="column is-3">
-                    <div class="field">
-                        <label class="label">Postnummer</label>
-                        <div class="control">
-                            <input id="renterInvoiceZipCode" class="input is-medium" type="text" placeholder="">
+                    <div class="apt-save-button">
+                        <button class="button is-large is-fullwidth is-success">SPARA</button>
+                    </div>
+                </section>
+            </div>
+            <div class="column">
+                <section class="renter-form is-hidden">
+                    <div class="columns">
+                        <div class="column is-7">
+                            <div class="field">
+                                <label class="label">Namn</label>
+                                <div class="control">
+                                    <input id="renterName" class="input is-medium" type="text" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-5">
+                            <div class="field ">
+                                <label class="label">personnummer</label>
+                                <div class="control">
+                                    <input id="renterSocialNumber" class="input is-medium" type="text" placeholder="">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="columns">
-                <div class="column is-6">
-                    <div class="field">
-                        <label class="label">Ort</label>
-                        <div class="control">
-                            <input id="renterInvoiceCity" class="input is-medium" type="text" placeholder="">
+                    <div class="columns">
+                        <div class="column is-5">
+                            <div class="field ">
+                                <label class="label">Mobilnummer</label>
+                                <div class="control">
+                                    <input id="renterMobileNumber" class="input is-medium" type="tel" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-7">
+                            <div class="field ">
+                                <label class="label">Email</label>
+                                <div class="control">
+                                    <input id="renterEmail" class="input is-medium" type="email" placeholder="">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="columns">
+                        <div class="column is-9">
+                            <div class="field">
+                                <label class="label">Adress</label>
+                                <div class="control">
+                                    <input id="renterAddress" class="input is-medium" type="text" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-3">
+                            <div class="field">
+                                <label class="label">Postnummer</label>
+                                <div class="control">
+                                    <input id="renterZipCode" class="input is-medium" type="text" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-6">
+                            <div class="field">
+                                <label class="label">Ort</label>
+                                <div class="control">
+                                    <input id="renterCity" class="input is-medium" type="text" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-6">
+                            <label class="invoiceCheckbox checkbox">
+                                <input id="invoice-address" type="checkbox">
+                                Faktureringsadress
+                            </label>
+                        </div>
+                    </div>
+                    <div class="invoice is-hidden">
+                        <div class="columns">
+                            <div class="column is-9">
+                                <div class="field">
+                                    <label class="label">Adress</label>
+                                    <div class="control">
+                                        <input id="renterInvoiceAddress" class="input is-medium" type="text" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column is-3">
+                                <div class="field">
+                                    <label class="label">Postnummer</label>
+                                    <div class="control">
+                                        <input id="renterInvoiceZipCode" class="input is-medium" type="text" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-6">
+                                <div class="field">
+                                    <label class="label">Ort</label>
+                                    <div class="control">
+                                        <input id="renterInvoiceCity" class="input is-medium" type="text" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="renter-save-button">
+                        <button class="button is-large is-fullwidth is-success">SPARA</button>
+                    </div>
+                </section>
             </div>
         </div>
-        <div class="renter-save-button">
-            <button class="button is-large is-fullwidth is-success">SPARA</button>
-        </div>
-    </section>
-</div>
-    <footer class="footer">
-        <div class="content has-text-centered">
-            <p>
-                <strong>Dream apartment</strong> by Group5. The source code is licensed
-                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
-            </p>
-        </div>
-    </footer>
+    </div>
 </body>
 </html>
