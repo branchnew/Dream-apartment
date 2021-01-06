@@ -77,6 +77,11 @@ body {
     padding: 10px;
 }
 
+.rntrs, .noFree, .free {
+    padding-top: 20px;
+    font-size: medium;
+}
+
 .delete:hover {
     background-color: rgba(206, 31, 31, 0.83);
 }

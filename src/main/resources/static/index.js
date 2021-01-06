@@ -104,7 +104,6 @@ addRntLink.onclick = () => {
     aptTbl.classList.add('is-hidden');
 }
 
-
 searchInput.onchange = () => {
     filterByAptNumber();
     filterByCity();
@@ -118,6 +117,7 @@ const filterByCity = () => {
             return apartment.address.city.toLowerCase().indexOf(searchInput.value.toLowerCase()) !== -1
         }
     })
+
     return generateAptTbl(aprts);
 }
 
@@ -337,6 +337,7 @@ invoiceCheckbox.onclick = () => {
 invoiceCheckingBox();
 
 
+
 async function getApartments() {
     const response = await axios({
         url: 'http://localhost:8082/apartment',
@@ -355,8 +356,29 @@ async function getRenters() {
     return renters;
 }
 
-getApartments().then(result => apartments = result);
-getRenters().then(result => renters = result);
+getApartments().then(result => {
+    apartments = result;
+
+    const freeAptsCount = apartments.reduce((sum, apartment) => {
+        console.log(apartment)
+        if (apartment.renter === null) {
+            return sum+1;
+        } else {
+            return sum;
+        }
+    },0);
+    const freeApt = document.querySelector('.vacant');
+    freeApt.innerHTML = freeAptsCount;
+
+    const occuApt = document.querySelector('.occupied');
+    occuApt.innerHTML = apartments.length - freeAptsCount;
+});
+
+getRenters().then(result => {
+    renters = result;
+    const rents = document.querySelector('.renters');
+    rents.innerHTML = renters.length;
+});
 
 
 const deleteApartment = async (id) => {
