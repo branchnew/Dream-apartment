@@ -6,6 +6,7 @@ import com.group5.dreamapartment.entity.Renter;
 import com.group5.dreamapartment.service.AddressService;
 import com.group5.dreamapartment.service.ApartmentService;
 import com.group5.dreamapartment.service.RenterService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -72,5 +73,12 @@ public class RenterController {
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
       }
     }
+
+    @PutMapping(value = "/{renterId}")
+    public void removeRntApt(@RequestParam Long renterId) {
+      Renter renter = renterService.findRenter(renterId);
+      renterService.removeAptFromRnt(renter);
+    }
+
 
 }

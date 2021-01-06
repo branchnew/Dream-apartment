@@ -3,9 +3,10 @@ package com.group5.dreamapartment.service;
 import com.group5.dreamapartment.entity.Address;
 import com.group5.dreamapartment.entity.Apartment;
 import com.group5.dreamapartment.entity.Renter;
-import com.group5.dreamapartment.repository.ApartmentRepository;
 import com.group5.dreamapartment.repository.RenterRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class RenterService {
@@ -44,15 +45,22 @@ public class RenterService {
   }
 
   public void assignAptToRenter(Apartment apt, Renter renter) {
-    try{
+    if (apt.getRenter() == null) {
       renter.setApartment(apt);
       renterRepository.save(renter);
-    } catch (NullPointerException ex){
-      System.out.println("Something...! " + ex);
+    } else {
+      throw new ResponseStatusException(
+          HttpStatus.BAD_REQUEST, "Apartment is already occupied."
+      );
     }
   }
 
   public Renter findRenter(Long renterID) {
     return this.renterRepository.findRenterById(renterID);
+  }
+
+  public void removeAptFromRnt(Renter renter) {
+    renter.setApartment(null);
+    renterRepository.save(renter);
   }
 }

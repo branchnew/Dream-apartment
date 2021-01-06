@@ -1,53 +1,20 @@
-html, body {
+
+html, body{
     height: 100vh;
-}
-.container.is-fluid {
-    font-family: "Lucida Grande";
-    padding-left: 0;
-    padding-right: 0;
-}
-
-a:hover {
-    color: white;
-    text-decoration-line: underline ;
-}
-
-.search-input {
-    height: 75px;
-    text-align: center;
-}
-
-.searching-input {
-    padding: 10px 0px 0px 10px;
-}
-
-.searching-input input:focus {
-    box-shadow: inset 0 .0625em .125em #217a21;
-}
-
-.input:focus {
-    border-color: #e7e7e7;
-}
-
-.columns {
+    width: 100vw;
     padding: 0;
+    margin: 0;
 }
 
-.container {
-    padding: 10px;
+body {
+    overflow: inherit;
+}
+.search-input {
+    text-align: center;
 }
 
 .input::placeholder {
-    color: #000000;
     text-align: center;
-}
-
-.input:hover {
-    border-color: #e7e7e7;
-}
-
-.hero-body {
-    padding: 0;
 }
 
 .logo h1, .logo h2 {
@@ -63,11 +30,6 @@ a:hover {
     background-color: #0d2930;
 }
 
-.maincontent {
-    padding: 0;
-    height: 72vh;
-}
-
 .menu {
     padding-left: 3vw;
     padding-top: 40px;
@@ -77,12 +39,12 @@ a:hover {
     color: white;
 }
 
+.main {
+    min-height: 690px;
+}
+
 .menu p {
     color: #bababa;
-}
-section .section {
-    font-weight: 400;
-    text-align: center;
 }
 
 .textarea:not([rows]) {
@@ -95,14 +57,6 @@ section .section {
 
 .invoiceCheckbox {
     font-weight: 600;
-}
-
-.apt-save-button{
-    padding-top: 50px;
-}
-
-.renter-save-button{
-    padding-top: 50px;
 }
 
 .select select:not([multiple]) {
@@ -119,28 +73,18 @@ section .section {
     box-shadow: 0 0 0 .125em rgba(233, 233, 233, 0.25);
 }
 
-.foot {
-    background-color: #ececec;
-    padding: 20px;
- }
+.mnu {
+    padding: 10px;
+}
+
+.delete:hover {
+    background-color: rgba(206, 31, 31, 0.83);
+}
 
 .foot-text {
     text-align: center;
     color: white;
     background-color: #0d2930;
+    padding: 5px;
 }
 
-@media screen and (min-width:1024px) {
-    .section.is-medium {
-        padding:0;
-    }
-    .section.is-large {
-        padding:0;
-    }
-}
-
-@media screen and (min-width:769px),print {
-    .hero.is-large .hero-body {
-        padding: 0;
-    }
-}

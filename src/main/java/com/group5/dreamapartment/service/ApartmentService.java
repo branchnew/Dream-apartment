@@ -47,6 +47,10 @@ public class ApartmentService {
   }
 
   public void deleteById(Long id) {
+    Apartment apt = this.findApt(id);
+    if (apt.getRenter() != null) {
+      throw new IllegalStateException("Apartment is not vacant, thus cannot be deleted");
+    }
     apartmentRepository.deleteById(id);
   }
 

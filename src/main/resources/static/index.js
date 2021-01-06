@@ -15,8 +15,7 @@ const rntTblBody = document.querySelector(".renter-body");
 const rntTbl = document.querySelector(".renter-table");
 const aptForm = document.querySelector('.apartment-form');
 const rntForm = document.querySelector('.renter-form');
-const deleteAptButton = document.querySelector('.button');
-const aptRow = document.querySelector('.apt-row');
+const section = document.querySelector('.sec');
 
 
 let apartments = [];
@@ -152,22 +151,79 @@ const generateAptTbl = (apartments) => {
 
         })
         const deleteAptButton = document.createElement('button');
+        let assignRnt = document.createElement('button');
         const cell = document.createElement("td");
-        deleteAptButton.innerHTML= 'Delete';
-        deleteAptButton.classList.add('button', 'is-danger', 'is-outlined');
+        deleteAptButton.classList.add('delete', 'is-medium', 'is-danger');
+        assignRnt.classList.add('button', 'is-success');
+        assignRnt.innerHTML = '+Gäst';
         cell.appendChild(deleteAptButton);
+        cell.appendChild(assignRnt);
         row.appendChild(cell);
         aptTblBody.appendChild(row);
 
+        if (a.renter != null){
+            const deleteRnt = assignRnt;
+            deleteRnt.classList.add('is-danger');
+            deleteRnt.innerHTML = '-Gäst';
+        }
+
+
+        assignRnt.onclick = () => {
+            const insertRntName = document.createElement('input');
+            insertRntName.classList.add('input', 'insertBtn');
+            cell.appendChild(insertRntName);
+            assignRnt.classList.add('is-hidden');
+            insertRntName.onblur = () => {
+                assignRnt.classList.remove('is-hidden');
+                insertRntName.classList.add('is-hidden');
+            }
+            insertRntName.addEventListener('keyup', async (e) => {
+                if (e.key === 'Enter') {
+                    try{
+                        const foundRenter = renters.find(renter => renter.socialSecNumber == insertRntName.value);
+                        await assignAptToRnt(a.id, foundRenter.id);
+                        insertRntName.classList.add('is-hidden');
+                        assignRnt.classList.remove('is-hidden');
+                        const deleteRnt = assignRnt;
+                        deleteRnt.classList.add('is-danger');
+                        deleteRnt.innerHTML = '-Gäst';
+                    } catch {
+                        const message = 'the apartment has already a renter';
+                        warningMessage(message);
+                    }
+                }
+            });
+        }
+        /*const insertRntBtn = document.querySelector('input');
+        let deleteRnt = assignRnt;
+        deleteRnt.onclick = () => {
+            insertRntBtn.classList.add('is-hidden');
+            deleteRnt.classList.remove('is-danger');
+            deleteRnt.classList.add('is-success');
+            deleteRnt.innerHTML = '+Gäst';
+        }*/
+
         deleteAptButton.onclick = () => {
-            deleteApartment(a.id);
-            aptTblBody.removeChild(row);
+            if (a.renter == null){
+                deleteApartment(a.id);
+                aptTblBody.removeChild(row);
+            } else {
+                const message = 'Lägenheten är upptagen, det går inte att ta bort!';
+                warningMessage(message);
+            }
         }
     });
     aptTbl.appendChild(aptTblBody);
 }
 
-
+const warningMessage = (msg) => {
+    const message = document.querySelector('.msg');
+    const msgwarning = document.querySelector('.msgWaring');
+    msgwarning.classList.remove('is-hidden');
+    message.style.color = 'red';
+    message.innerHTML = msg;
+    setTimeout(() => msgwarning.classList.add('is-hidden'), 3000);
+}
 
 const generateRntTbl = (renters) => {
     renters.forEach(r => {
@@ -187,16 +243,13 @@ const generateRntTbl = (renters) => {
         })
         const deleteRntButton = document.createElement('button');
         const cell = document.createElement("td");
-        deleteRntButton.innerHTML= 'Delete';
-        deleteRntButton.classList.add('button', 'is-danger', 'is-outlined');
+        deleteRntButton.classList.add('delete', 'is-medium', 'is-danger');
         cell.appendChild(deleteRntButton);
         row.appendChild(cell);
         rntTblBody.appendChild(row);
     });
     rntTbl.appendChild(rntTblBody);
 }
-
-
 
 let namn = document.querySelector('#renterName');
 let socialNumber = document.querySelector('#renterSocialNumber');
@@ -307,6 +360,17 @@ const deleteApartment = async (id) => {
     } catch (e) {
         console.error(e);
     }
+};
+
+const assignAptToRnt = async (aptId, renterId)=> {
+    const params = new URLSearchParams({aptId, renterId}).toString();
+    return axios.put('/renter', params, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+
+    })
 };
 
 
