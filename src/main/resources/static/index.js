@@ -55,14 +55,14 @@ const createApartments = () => {
 aptButton.onclick = () => {
     createApartments();
     aptNumber.value = '',
-    size.value = '',
-    rooms.value = '',
-    rent.value = '',
-    address.value = '',
-    zipCode.value = '',
-    city.value = '',
-    description.value = '',
-    kitchenSelect.value = '';
+        size.value = '',
+        rooms.value = '',
+        rent.value = '',
+        address.value = '',
+        zipCode.value = '',
+        city.value = '',
+        description.value = '',
+        kitchenSelect.value = '';
 }
 
 const aptLink = document.querySelector('.aptLink');
@@ -113,8 +113,8 @@ searchInput.onchange = () => {
 }
 
 const filterByCity = () => {
-    const aprts =  apartments.filter((apartment) => {
-        if (apartment.renter === null){
+    const aprts = apartments.filter((apartment) => {
+        if (apartment.renter === null) {
             return apartment.address.city.toLowerCase().indexOf(searchInput.value.toLowerCase()) !== -1
         }
     })
@@ -122,7 +122,7 @@ const filterByCity = () => {
 }
 
 const filterByAptNumber = () => {
-    const aparts =apartments.filter(apartment => apartment.apartmentNumber == searchInput.value);
+    const aparts = apartments.filter(apartment => apartment.apartmentNumber == searchInput.value);
     return generateAptTbl(aparts);
 }
 
@@ -142,7 +142,8 @@ const generateAptTbl = (apartments) => {
             a.kitchentype,
             a.rent,
             `${a.address.street} ${a.address.city} ${a.address.zipCode} ${a.address.country}`,
-            a.description
+            a.description,
+            a.renter?.name || ''
         ].forEach(text => {
             const cell = document.createElement("td");
             const node = document.createTextNode(text);
@@ -161,50 +162,47 @@ const generateAptTbl = (apartments) => {
         row.appendChild(cell);
         aptTblBody.appendChild(row);
 
-        if (a.renter != null){
-            const deleteRnt = assignRnt;
-            deleteRnt.classList.add('is-danger');
-            deleteRnt.innerHTML = '-Gäst';
+        if (a.renter != null) {
+            assignRnt.classList.remove('is-success');
+            assignRnt.classList.add('is-danger');
+            assignRnt.innerHTML = '-Gäst';
         }
-
 
         assignRnt.onclick = () => {
-            const insertRntName = document.createElement('input');
-            insertRntName.classList.add('input', 'insertBtn');
-            cell.appendChild(insertRntName);
-            assignRnt.classList.add('is-hidden');
-            insertRntName.onblur = () => {
-                assignRnt.classList.remove('is-hidden');
-                insertRntName.classList.add('is-hidden');
-            }
-            insertRntName.addEventListener('keyup', async (e) => {
-                if (e.key === 'Enter') {
-                    try{
-                        const foundRenter = renters.find(renter => renter.socialSecNumber == insertRntName.value);
-                        await assignAptToRnt(a.id, foundRenter.id);
-                        insertRntName.classList.add('is-hidden');
-                        assignRnt.classList.remove('is-hidden');
-                        const deleteRnt = assignRnt;
-                        deleteRnt.classList.add('is-danger');
-                        deleteRnt.innerHTML = '-Gäst';
-                    } catch {
-                        const message = 'the apartment has already a renter';
-                        warningMessage(message);
-                    }
+            if (assignRnt.className.indexOf('is-success') >= 0 ) {
+                const insertRntName = document.createElement('input');
+                insertRntName.classList.add('input', 'rntInput');
+                cell.appendChild(insertRntName);
+                assignRnt.classList.add('is-hidden');
+                insertRntName.onblur = () => {
+                    assignRnt.classList.remove('is-hidden');
+                    insertRntName.classList.add('is-hidden');
                 }
-            });
+                insertRntName.addEventListener('keyup', async (e) => {
+                    if (e.key === 'Enter') {
+                        try {
+                            const foundRenter = renters.find(renter => renter.socialSecNumber == insertRntName.value);
+                            await assignAptToRnt(a.id, foundRenter.id);
+                            insertRntName.classList.add('is-hidden');
+                            assignRnt.classList.remove('is-hidden');
+                            assignRnt.classList.add('is-danger');
+                            assignRnt.innerHTML = '-Gäst';
+                        } catch {
+                            const message = 'the apartment has already a renter';
+                            warningMessage(message);
+                        }
+                    }
+                });
+            } else if (assignRnt.className.indexOf('is-danger') >= 0 ) {
+                assignRnt.classList.remove('is-danger');
+                assignRnt.classList.add('is-success');
+                assignRnt.innerHTML = '+Gäst';
+                removeAptFromRnt(a.renter.id);
+            }
         }
-        /*const insertRntBtn = document.querySelector('input');
-        let deleteRnt = assignRnt;
-        deleteRnt.onclick = () => {
-            insertRntBtn.classList.add('is-hidden');
-            deleteRnt.classList.remove('is-danger');
-            deleteRnt.classList.add('is-success');
-            deleteRnt.innerHTML = '+Gäst';
-        }*/
 
         deleteAptButton.onclick = () => {
-            if (a.renter == null){
+            if (a.renter == null) {
                 deleteApartment(a.id);
                 aptTblBody.removeChild(row);
             } else {
@@ -234,7 +232,8 @@ const generateRntTbl = (renters) => {
             r.telNumber,
             r.email,
             `${r.address.street} ${r.address.city} ${r.address.zipCode} ${r.address.country}`,
-            `${r.address.invoiceStreet} ${r.address.invoiceCity} ${r.address.invoiceZipCode} ${r.address.invoiceCountry}`
+            (r.address.invoiceStreet && `${r.address.invoiceStreet} ${r.address.invoiceCity} 
+            ${r.address.invoiceZipCode} ${r.address.invoiceCountry}`) || ''
         ].forEach(text => {
             const cell = document.createElement("td");
             const node = document.createTextNode(text);
@@ -247,6 +246,16 @@ const generateRntTbl = (renters) => {
         cell.appendChild(deleteRntButton);
         row.appendChild(cell);
         rntTblBody.appendChild(row);
+
+        deleteRntButton.onclick = async () => {
+            if (r.apartment == null) {
+                await deleteRenter(r.id);
+                rntTblBody.removeChild(row);
+            } else {
+                const message = 'Hyresgästen har en lägenhet, det kan inte tas bort!';
+                warningMessage(message);
+            }
+        }
     });
     rntTbl.appendChild(rntTblBody);
 }
@@ -286,15 +295,15 @@ renterButton.onclick = () => {
     renters.push(renter);
 
     namn.value = '',
-    socialNumber.value = '',
-    mobileNumber.value = '',
-    email.value = '',
-    renterAddress.value = '',
-    renterZipCode.value = '',
-    renterCity.value = '',
-    invoiceAddress.value = '',
-    invoiceZipCode.value = '',
-    invoiceCity.value = ''
+        socialNumber.value = '',
+        mobileNumber.value = '',
+        email.value = '',
+        renterAddress.value = '',
+        renterZipCode.value = '',
+        renterCity.value = '',
+        invoiceAddress.value = '',
+        invoiceZipCode.value = '',
+        invoiceCity.value = ''
 
     const params = new URLSearchParams(renter).toString();
     axios.post('/renter', params,
@@ -312,7 +321,7 @@ renterButton.onclick = () => {
 }
 
 const invoiceCheckingBox = () => {
-    if(invoiceAddressCheckbox.checked){
+    if (invoiceAddressCheckbox.checked) {
         renterInvoiceForm.classList.remove('is-hidden');
         renterForm.style.height = '900px';
     } else {
@@ -329,7 +338,7 @@ invoiceCheckingBox();
 
 
 async function getApartments() {
-    const response = await axios ({
+    const response = await axios({
         url: 'http://localhost:8082/apartment',
         method: "GET"
     })
@@ -338,7 +347,7 @@ async function getApartments() {
 }
 
 async function getRenters() {
-    const response = await axios ({
+    const response = await axios({
         url: 'http://localhost:8082/renter',
         method: "GET"
     })
@@ -362,9 +371,32 @@ const deleteApartment = async (id) => {
     }
 };
 
-const assignAptToRnt = async (aptId, renterId)=> {
+const deleteRenter = async (id) => {
+    const BASE_URL = '';
+    try {
+        const res = await axios.delete(`${BASE_URL}/renter/${id}`);
+        console.log(`Deleted apartment ID: `, id);
+
+        return res.data;
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+const assignAptToRnt = async (aptId, renterId) => {
     const params = new URLSearchParams({aptId, renterId}).toString();
     return axios.put('/renter', params, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+
+    })
+};
+
+const removeAptFromRnt =  (renterId) => {
+    const params = new URLSearchParams({renterId}).toString();
+    return axios.put('/renter/{renterId}', params, {
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
