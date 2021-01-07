@@ -16,8 +16,8 @@ public class RenterService {
     this.renterRepository = renterRepository;
   }
 
-  public void create(String name, String socialSecNumber, long telNumber,
-                     String email, Address address, Address invoiceAddress) {
+  public Renter create(String name, String socialSecNumber, long telNumber,
+                       String email, Address address, Address invoiceAddress) {
 
     var renter = new Renter();
     renter.setAddress(address);
@@ -34,6 +34,7 @@ public class RenterService {
     
     this.renterRepository.save(renter);
 
+    return renter;
   }
 
   public Iterable<Renter> getAll() {
@@ -44,10 +45,10 @@ public class RenterService {
     this.renterRepository.deleteById(id);
   }
 
-  public void assignAptToRenter(Apartment apt, Renter renter) {
+  public Renter assignAptToRenter(Apartment apt, Renter renter) {
     if (apt.getRenter() == null) {
       renter.setApartment(apt);
-      renterRepository.save(renter);
+      return renterRepository.save(renter);
     } else {
       throw new ResponseStatusException(
           HttpStatus.BAD_REQUEST, "Apartment is already occupied."
@@ -59,8 +60,8 @@ public class RenterService {
     return this.renterRepository.findRenterById(renterID);
   }
 
-  public void removeAptFromRnt(Renter renter) {
+  public Renter removeAptFromRnt(Renter renter) {
     renter.setApartment(null);
-    renterRepository.save(renter);
+    return renterRepository.save(renter);
   }
 }

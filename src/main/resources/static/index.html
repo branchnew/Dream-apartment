@@ -27,12 +27,12 @@
                 </div>
             </section>
         </div>
-        <div class="column">
+        <div class="column nav-statistic">
             <nav class="level">
                 <div class="level-item has-text-centered">
                     <div class="tile is-parent">
                         <article class="tile is-child notification is-primary">
-                            <p class="heading free">Lediga</p>
+                            <p class="heading free">Lediga lägenheter</p>
                             <p class="title vacant"></p>
                         </article>
                     </div>
@@ -40,7 +40,7 @@
                 <div class="level-item has-text-centered">
                     <div class="tile is-parent">
                         <article class="tile is-child notification is-danger">
-                            <p class="heading noFree">Upptagna</p>
+                            <p class="heading noFree">Upptagna Lägenheter</p>
                             <p class="title occupied"></p>
                         </article>
                     </div>
@@ -48,7 +48,7 @@
                 <div class="level-item has-text-centered">
                     <div class="tile is-parent">
                         <article class="tile is-child notification is-warning">
-                            <p class="heading rntrs">Hyresgäster</p>
+                            <p class="heading rntrs">Våra gäster</p>
                             <p class="title renters"></p>
                         </article>
                     </div>
@@ -63,8 +63,9 @@
                     Allmän
                 </p>
                 <ul class="menu-list">
-                    <li><a class="aptLink">Lägenhet</a></li>
-                    <li><a class="renterLink">Hyresgäst</a></li>
+                    <li><a class="homeLink">Home</a></li>
+                    <li><a class="aptLink">Lägenheter</a></li>
+                    <li><a class="renterLink">Hyresgäster</a></li>
                 </ul>
                 <p class="menu-label">
                     Verktyg
@@ -72,14 +73,14 @@
                 <ul class=" menu-list">
                     <li><a class="addAptLink">Lägg till lägenhet</a></li>
                     <li><a class="addRntLink">Lägg till hyresgäst</a></li>
-                    <li><a>Lägenhet beskrivning</a></li>
-
                 </ul>
             </aside>
         </div>
-        <div class="column sec">
-            <div class="searching-input column is-4">
-                <input class="search-input input is-medium" type="text" placeholder="Sök lght nummer, Ort, Personnummer">
+        <div class="column">
+            <div class="columns searching is-centered">
+                <div class="searching-input column is-half">
+                    <input class="search-input input is-large" type="text" placeholder="Sök lght nummer, Ort, Personnummer">
+                </div>
             </div>
             <div class="columns msgWaring is-centered is-hidden">
                 <div class="column is-half">
@@ -95,9 +96,9 @@
                         <th>Rum</th>
                         <th>Kök</th>
                         <th>Hyra</th>
-                        <th>Address</th>
+                        <th>Namn</th>
                         <th>Beskrivning</th>
-                        <th>namn</th>
+                        <th>Address</th>
                     </tr>
                     </thead>
                     <tbody class="apt-body"></tbody>
@@ -205,7 +206,7 @@
                         </div>
                     </div>
                     <div class="apt-save-button">
-                        <button class="button is-large is-fullwidth is-success">SPARA</button>
+                        <button class="button is-large is-success">SPARA</button>
                     </div>
                 </section>
             </div>
@@ -314,7 +315,7 @@
                         </div>
                     </div>
                     <div class="renter-save-button">
-                        <button class="button is-large is-fullwidth is-success">SPARA</button>
+                        <button class="button is-large is-success">SPARA</button>
                     </div>
                 </section>
             </div>

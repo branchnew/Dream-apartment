@@ -8,9 +8,21 @@ html, body{
 
 body {
     overflow: inherit;
+    background-image: url("images/foto1.jpg");
+    background-size: cover;
 }
 .search-input {
     text-align: center;
+    border-color: #9d9d9d;
+    height: 70px;
+}
+
+.search-input:hover {
+    box-shadow: 0 0 0 .125em rgba(50,115,220,.25);
+}
+
+.searching {
+    padding-top: 35px;
 }
 
 .input::placeholder {
@@ -28,6 +40,10 @@ body {
 .mnu {
     padding: 0;
     background-color: #0d2930;
+}
+
+.nav-statistic {
+    padding-bottom: 20px;
 }
 
 .menu {
@@ -78,7 +94,7 @@ body {
 }
 
 .rntrs, .noFree, .free {
-    padding-top: 20px;
+    padding-top: 15px;
     font-size: medium;
 }
 

@@ -24,17 +24,14 @@ public class ApartmentController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public String create(@RequestParam String street, @RequestParam String city, @RequestParam String zipCode,
+  public Apartment create(@RequestParam String street, @RequestParam String city, @RequestParam String zipCode,
                        @RequestParam String country, @RequestParam int apartmentNumber,
                        @RequestParam String kitchentype, @RequestParam int rent, @RequestParam Byte rooms,
                        @RequestParam int size, @RequestParam String description ) {
 
     Address address = addressService.create(street, city, zipCode, country);
-    aptService.create(address, apartmentNumber, kitchentype, rent, rooms, size, description);
-    return "Size: " + size + " Description: " + description +
-        " Address: " + address + " Rooms: " + rooms +
-        " Kitchentype: " + kitchentype + " Rent: " + rent +
-        " Apartment number: " + apartmentNumber;
+    return aptService.create(address, apartmentNumber, kitchentype, rent, rooms, size, description);
+
   }
 
   @GetMapping
