@@ -23,6 +23,7 @@ body {
 
 .searching {
     padding-top: 35px;
+    padding-left: 10px;
 }
 
 .input::placeholder {
@@ -44,6 +45,11 @@ body {
 
 .nav-statistic {
     padding-bottom: 20px;
+}
+
+.apt-save-button, .renter-save-button{
+    float:right;
+    padding-right: 30px;
 }
 
 .menu {
@@ -91,6 +97,10 @@ body {
 
 .mnu {
     padding: 10px;
+}
+
+.title.msg {
+    font-size: medium;
 }
 
 .rntrs, .noFree, .free {

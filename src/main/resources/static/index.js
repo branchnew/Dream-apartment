@@ -16,7 +16,9 @@ const rntTbl = document.querySelector(".renter-table");
 const aptForm = document.querySelector('.apartment-form');
 const rntForm = document.querySelector('.renter-form');
 const body = document.querySelector('body');
-
+const message = document.querySelector('.msg');
+const msgwarning = document.querySelector('.msgWaring');
+const successmessage = document.querySelector('.mesge');
 
 let apartments = [];
 let renters = [];
@@ -207,16 +209,13 @@ const generateAptTbl = (apts) => {
                             assignRnt.classList.remove('is-success');
                             assignRnt.classList.add('is-danger');
                             assignRnt.innerHTML = '-Gäst';
-
                             const td = document.getElementById(`${a.id}_5`);
                             td.innerHTML = a.renter.name;
                         } catch {
-                            const message = 'the apartment has already a renter';
+                            const message = 'Hyresgästen har redan en lägenhet!';
                             warningMessage(message);
                         }
                     }
-
-
                 });
             } else if (assignRnt.className.indexOf('is-danger') >= 0) {
                 assignRnt.classList.remove('is-danger');
@@ -232,6 +231,8 @@ const generateAptTbl = (apts) => {
             if (a.renter === null) {
                 await deleteApartment(a.id);
                 aptTblBody.removeChild(row);
+                const message = 'Lägenheten är rederad!';
+                successMessage(message);
             } else {
                 const message = 'Lägenheten är upptagen, det går inte att ta bort!';
                 warningMessage(message);
@@ -242,10 +243,17 @@ const generateAptTbl = (apts) => {
 }
 
 const warningMessage = (msg) => {
-    const message = document.querySelector('.msg');
-    const msgwarning = document.querySelector('.msgWaring');
+    successmessage.classList.remove('is-success');
+    successmessage.classList.add('is-danger');
     msgwarning.classList.remove('is-hidden');
-    message.style.color = 'red';
+    message.innerHTML = msg;
+    setTimeout(() => msgwarning.classList.add('is-hidden'), 3000);
+}
+
+const successMessage = (msg) => {
+    successmessage.classList.remove('is-danger');
+    successmessage.classList.add('is-success');
+    msgwarning.classList.remove('is-hidden');
     message.innerHTML = msg;
     setTimeout(() => msgwarning.classList.add('is-hidden'), 3000);
 }
@@ -305,7 +313,8 @@ const generateRntTbl = (rntrs) => {
             r.telNumber,
             r.email,
             `${r.address.street} ${r.address.city} ${r.address.zipCode} ${r.address.country}`,
-            `${r.address.invoiceStreet} ${r.address.invoiceCity} ${r.address.invoiceZipCode} ${r.address.invoiceCountry}`
+            (r.invoiceAddress.street && `${r.invoiceAddress.street} ${r.invoiceAddress.city} 
+            ${r.invoiceAddress.zipCode} ${r.invoiceAddress.country}`) || ''
         ].forEach(text => {
             const cell = document.createElement("td");
             const node = document.createTextNode(text);
@@ -415,7 +424,7 @@ const deleteRenter = async (id) => {
 
 const assignAptToRnt = async (aptId, renterId) => {
     const params = new URLSearchParams({aptId, renterId}).toString();
-    const res = axios.put('/renter', params, {
+    const res = await axios.put('/renter', params, {
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'

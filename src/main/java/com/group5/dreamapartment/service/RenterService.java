@@ -46,12 +46,16 @@ public class RenterService {
   }
 
   public Renter assignAptToRenter(Apartment apt, Renter renter) {
-    if (apt.getRenter() == null) {
+    if (apt.getRenter() == null && renter.getApartment() == null) {
       renter.setApartment(apt);
       return renterRepository.save(renter);
-    } else {
+    } else if (apt.getRenter() != null){
       throw new ResponseStatusException(
           HttpStatus.BAD_REQUEST, "Apartment is already occupied."
+      );
+    } else {
+      throw new ResponseStatusException(
+          HttpStatus.BAD_REQUEST, "Renter har already an apartment."
       );
     }
   }
