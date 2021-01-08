@@ -105,30 +105,18 @@ homeLink.onclick = () => {
 }
 
 searchInput.onchange = () => {
-    switch(searchInput.value) {
-        case apatment.city:
-            const aprts = apartments.filter((apartment) => {
-                if (apartment.renter === null) {
-                    return apartment.address.city.toLowerCase().indexOf(searchInput.value.toLowerCase()) !== -1
-                }
-            });
-            generateAptTbl(aprts);
-            break;
-        case apartment.apartmentNumber:
-            const aparts = apartments.filter(apartment => apartment.apartmentNumber == searchInput.value);
-            generateAptTbl(aparts);
-            break;
-
-
-        case renter.socialSecNumber:
-            const apts = renters.filter(renter => renter.socialSecNumber == searchInput.value);
-            generateRntTbl(apts);
-            break;
-    }
+    const foundApts  = apartments.filter(s =>
+        s.address.city.toLowerCase().indexOf(searchInput.value.toLowerCase()) >= 0 ||
+        s.apartmentNumber === parseInt(searchInput.value));
+    const foundRnts = renters.filter(b => b.socialSecNumber === searchInput.value);
+    if (foundApts.length > 0) aptTbl.classList.remove('is-hidden');
+    if (foundRnts.length > 0) rntTbl.classList.remove('is-hidden');
+    generateAptTbl(foundApts);
+    generateRntTbl(foundRnts);
+    rntTblBody.innerHTML = '';
+    aptTblBody.innerHTML = '';
     searchInput.value = '';
 }
-
-
 
 function updateAptCounters() {
     const freeAptsCount = apartments.reduce((sum, apartment) => {
@@ -149,8 +137,8 @@ function updateRntCounters() {
     rents.innerHTML = renters.length;
 }
 
-const generateAptTbl = () => {
-    apartments.forEach(a => {
+const generateAptTbl = (apts) => {
+    apts.forEach(a => {
         const row = document.createElement("tr");
         [
             a.apartmentNumber,
@@ -163,7 +151,7 @@ const generateAptTbl = () => {
             `${a.address.street} ${a.address.city} ${a.address.zipCode} ${a.address.country}`,
         ].forEach((text, i) => {
             const cell = document.createElement("td");
-            cell.setAttribute('id', i++);
+            cell.setAttribute('id', `${a.id}_${i}`);
             const node = document.createTextNode(text);
             cell.appendChild(node);
             row.appendChild(cell);
@@ -202,18 +190,15 @@ const generateAptTbl = () => {
                     if (e.key === 'Enter') {
                         try {
                             const foundRenter = renters.find(renter => renter.socialSecNumber == insertRntName.value);
-                            console.log(foundRenter);
                             await assignAptToRnt(a.id, foundRenter.id);
                             insertRntName.classList.add('is-hidden');
                             assignRnt.classList.remove('is-hidden');
                             assignRnt.classList.remove('is-success');
                             assignRnt.classList.add('is-danger');
                             assignRnt.innerHTML = '-Gäst';
-                            a.renter = foundRenter;
-                            a.renter.name = foundRenter.name;
-                            const td = document.getElementById('5');
+
+                            const td = document.getElementById(`${a.id}_5`);
                             td.innerHTML = a.renter.name;
-                            updateAptCounters();
                         } catch {
                             const message = 'the apartment has already a renter';
                             warningMessage(message);
@@ -227,19 +212,15 @@ const generateAptTbl = () => {
                 assignRnt.classList.add('is-success');
                 assignRnt.innerHTML = '+Gäst';
                 await removeAptFromRnt(a.renter.id);
-                a.renter = null;
-                const td = document.getElementById('5');
+                const td = document.getElementById(`${a.id}_5`);
                 td.innerHTML = '';
-                updateAptCounters();
             }
         }
 
         deleteAptButton.onclick = async () => {
             if (a.renter === null) {
                 await deleteApartment(a.id);
-                apartments = apartments.filter(y => y.id !== a.id);
                 aptTblBody.removeChild(row);
-                updateAptCounters();
             } else {
                 const message = 'Lägenheten är upptagen, det går inte att ta bort!';
                 warningMessage(message);
@@ -258,7 +239,7 @@ const warningMessage = (msg) => {
     setTimeout(() => msgwarning.classList.add('is-hidden'), 3000);
 }
 
-const generateRntTbl = () => {
+const generateRntTbl = (rntrs) => {
     renters.forEach(r => {
         const row = document.createElement("tr");
         [
@@ -286,9 +267,7 @@ const generateRntTbl = () => {
         deleteRntButton.onclick = async () => {
             if (r.apartment === null) {
                 await deleteRenter(r.id);
-                renters = renters.filter(x => x.id !== r.id);
                 rntTblBody.removeChild(row);
-                updateRntCounters();
             } else {
                 const message = 'Hyresgästen har en lägenhet, det kan inte tas bort!';
                 warningMessage(message);
@@ -413,12 +392,16 @@ async function getRenters() {
 const deleteApartment = async (id) => {
     const BASE_URL = '';
     const res = await axios.delete(`${BASE_URL}/apartment/${id}`);
+    apartments = apartments.filter(y => y.id !== id);
+    updateAptCounters();
     return res.data;
 };
 
 const deleteRenter = async (id) => {
     const BASE_URL = '';
     const res = await axios.delete(`${BASE_URL}/renter/${id}`);
+    renters = renters.filter(x => x.id !== id);
+    updateRntCounters();
     return res.data;
 };
 
@@ -430,8 +413,12 @@ const assignAptToRnt = async (aptId, renterId) => {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         }
     })
+    const foundRenter = renters.find(n => n.id == renterId);
+    const a = apartments.find(f => f.id == aptId);
+    a.renter = foundRenter;
+    a.renter.name = foundRenter.name;
+    updateAptCounters();
     return res.data;
-
 };
 
 const removeAptFromRnt = (renterId) => {
@@ -442,9 +429,10 @@ const removeAptFromRnt = (renterId) => {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         }
     })
+    const a = apartments.find(d => d.renter?.id == renterId);
+    a.renter = null;
+    updateAptCounters()
     return res.data;
 };
-
-
 
 
