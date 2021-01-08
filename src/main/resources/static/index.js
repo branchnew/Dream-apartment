@@ -108,13 +108,24 @@ searchInput.onchange = () => {
     const foundApts  = apartments.filter(s =>
         s.address.city.toLowerCase().indexOf(searchInput.value.toLowerCase()) >= 0 ||
         s.apartmentNumber === parseInt(searchInput.value));
-    const foundRnts = renters.filter(b => b.socialSecNumber === searchInput.value);
-    if (foundApts.length > 0) aptTbl.classList.remove('is-hidden');
-    if (foundRnts.length > 0) rntTbl.classList.remove('is-hidden');
-    generateAptTbl(foundApts);
-    generateRntTbl(foundRnts);
+    const foundRnts = renters.filter(b => b.socialSecNumber == searchInput.value);
+
+    if (foundApts.length > 0) {
+        aptTbl.classList.remove('is-hidden');
+    } else {
+        aptTbl.classList.add('is-hidden');
+    }
+
+    if (foundRnts.length > 0) {
+        rntTbl.classList.remove('is-hidden');
+    } else {
+        rntTbl.classList.add('is-hidden');
+    }
+
     rntTblBody.innerHTML = '';
     aptTblBody.innerHTML = '';
+    generateAptTbl(foundApts);
+    generateRntTbl(foundRnts);
     searchInput.value = '';
 }
 
@@ -239,8 +250,54 @@ const warningMessage = (msg) => {
     setTimeout(() => msgwarning.classList.add('is-hidden'), 3000);
 }
 
+let namn = document.querySelector('#renterName');
+let socialNumber = document.querySelector('#renterSocialNumber');
+let mobileNumber = document.querySelector('#renterMobileNumber');
+let email = document.querySelector('#renterEmail');
+let renterAddress = document.querySelector('#renterAddress');
+let renterZipCode = document.querySelector('#renterZipCode');
+let renterCity = document.querySelector('#renterCity');
+let invoiceAddress = document.querySelector('#renterInvoiceAddress');
+let invoiceZipCode = document.querySelector('#renterInvoiceZipCode');
+let invoiceCity = document.querySelector('#renterInvoiceCity');
+let invoiceAddressCheckbox = document.querySelector('#invoice-address');
+const renterInvoiceForm = document.querySelector('.invoice');
+const renterButton = document.querySelector('.renter-save-button');
+const invoiceCheckbox = document.querySelector('.invoiceCheckbox');
+
+renterButton.onclick = async () => {
+    let renter = {
+        name: namn.value,
+        socialSecNumber: socialNumber.value,
+        telNumber: mobileNumber.value,
+        email: email.value,
+        street: renterAddress.value,
+        zipCode: renterZipCode.value,
+        city: renterCity.value,
+        country: 'Sweden',
+        invoiceStreet: invoiceAddress.value,
+        invoiceZipCode: invoiceZipCode.value,
+        invoiceCity: invoiceCity.value,
+        invoiceCountry: 'Sweden'
+    }
+    const newRnt = await createRnt(renter);
+    renters.push(newRnt);
+    updateRntCounters();
+
+    namn.value = '',
+    socialNumber.value = '',
+    mobileNumber.value = '',
+    email.value = '',
+    renterAddress.value = '',
+    renterZipCode.value = '',
+    renterCity.value = '',
+    invoiceAddress.value = '',
+    invoiceZipCode.value = '',
+    invoiceCity.value = ''
+}
+
 const generateRntTbl = (rntrs) => {
-    renters.forEach(r => {
+    rntrs.forEach(r => {
         const row = document.createElement("tr");
         [
             r.name,
@@ -248,8 +305,7 @@ const generateRntTbl = (rntrs) => {
             r.telNumber,
             r.email,
             `${r.address.street} ${r.address.city} ${r.address.zipCode} ${r.address.country}`,
-            (r.address.invoiceStreet && `${r.address.invoiceStreet} ${r.address.invoiceCity} 
-            ${r.address.invoiceZipCode} ${r.address.invoiceCountry}`) || ''
+            `${r.address.invoiceStreet} ${r.address.invoiceCity} ${r.address.invoiceZipCode} ${r.address.invoiceCountry}`
         ].forEach(text => {
             const cell = document.createElement("td");
             const node = document.createTextNode(text);
@@ -275,54 +331,6 @@ const generateRntTbl = (rntrs) => {
         }
     });
     rntTbl.appendChild(rntTblBody);
-}
-
-let namn = document.querySelector('#renterName');
-let socialNumber = document.querySelector('#renterSocialNumber');
-let mobileNumber = document.querySelector('#renterMobileNumber');
-let email = document.querySelector('#renterEmail');
-let renterAddress = document.querySelector('#renterAddress');
-let renterZipCode = document.querySelector('#renterZipCode');
-let renterCity = document.querySelector('#renterCity');
-let invoiceAddress = document.querySelector('#renterInvoiceAddress');
-let invoiceZipCode = document.querySelector('#renterInvoiceZipCode');
-let invoiceCity = document.querySelector('#renterInvoiceCity');
-let invoiceAddressCheckbox = document.querySelector('#invoice-address');
-const renterInvoiceForm = document.querySelector('.invoice');
-const renterButton = document.querySelector('.renter-save-button');
-const invoiceCheckbox = document.querySelector('.invoiceCheckbox');
-const renterForm = document.querySelector('.renter-form');
-
-renterButton.onclick = async () => {
-    let renter = {
-        name: namn.value,
-        socialSecNumber: socialNumber.value,
-        telNumber: mobileNumber.value,
-        email: email.value,
-        street: renterAddress.value,
-        zipCode: renterZipCode.value,
-        city: renterCity.value,
-        country: 'Sweden',
-        invoiceStreet: invoiceAddress.value,
-        invoiceZipCode: invoiceZipCode.value,
-        invoiceCity: invoiceCity.value,
-        invoiceCountry: 'Sweden'
-    }
-    const newRnt = await createRnt(renter);
-    renters.push(newRnt);
-    updateRntCounters();
-
-    namn.value = '',
-        socialNumber.value = '',
-        mobileNumber.value = '',
-        email.value = '',
-        renterAddress.value = '',
-        renterZipCode.value = '',
-        renterCity.value = '',
-        invoiceAddress.value = '',
-        invoiceZipCode.value = '',
-        invoiceCity.value = ''
-
 }
 
 const invoiceCheckingBox = () => {

@@ -15,12 +15,10 @@ public class AddressController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String create(@RequestParam String street, @RequestParam String city,
+    public Address create(@RequestParam String street, @RequestParam String city,
                          @RequestParam String zipCode, @RequestParam String country) {
 
-      this.addressService.create( street, city, zipCode, country );
-      return "Street " + street + " City " + city +
-          " Zip code " + zipCode + " Country " + country;
+      return this.addressService.create( street, city, zipCode, country );
     }
 
     @GetMapping
