@@ -6,6 +6,7 @@ import com.group5.dreamapartment.entity.Renter;
 import com.group5.dreamapartment.service.AddressService;
 import com.group5.dreamapartment.service.ApartmentService;
 import com.group5.dreamapartment.service.RenterService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class RenterController {
 
   @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String create(@RequestParam String name, @RequestParam String socialSecNumber,
+    public Renter create(@RequestParam String name, @RequestParam String socialSecNumber,
                          @RequestParam long telNumber, @RequestParam String email,
                          @RequestParam String street, @RequestParam String city,
                          @RequestParam String zipCode, @RequestParam String country,
@@ -40,15 +41,11 @@ public class RenterController {
       Address address = addressService.create(street, city, zipCode, country);
       if(street.equals(invoiceStreet) && city.equals(invoiceCity)
           && zipCode.equals(invoiceZipCode) && country.equals(invoiceCountry)){
-        renterService.create(name, socialSecNumber, telNumber, email, address, address);
+        return renterService.create(name, socialSecNumber, telNumber, email, address, address);
       } else {
         Address invoiceAddress = addressService.create(invoiceStreet, invoiceCity, invoiceZipCode, invoiceCountry);
-        renterService.create(name, socialSecNumber, telNumber, email, address, invoiceAddress);
+        return renterService.create(name, socialSecNumber, telNumber, email, address, invoiceAddress);
       }
-
-      return "Name: " + name + " Social security number: " + socialSecNumber +
-            " Mobile: " + telNumber + " E-mail: " + email +
-            " Address: " + address + " Invoice address: " + invoiceAddress;
     }
 
   @GetMapping
@@ -57,10 +54,10 @@ public class RenterController {
   }
 
   @PutMapping()
-  public void aptToRenter(@RequestParam Long aptId, @RequestParam Long renterId) {
+  public Renter aptToRenter(@RequestParam Long aptId, @RequestParam Long renterId) {
     Apartment apt = aptService.findApt(aptId);
     Renter renter = renterService.findRenter(renterId);
-    renterService.assignAptToRenter(apt, renter);
+    return renterService.assignAptToRenter(apt, renter);
   }
 
   @DeleteMapping(value = "/{id}")
@@ -72,5 +69,12 @@ public class RenterController {
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
       }
     }
+
+    @PutMapping(value = "/{renterId}")
+    public Renter removeRntApt(@RequestParam Long renterId) {
+      Renter renter = renterService.findRenter(renterId);
+      return renterService.removeAptFromRnt(renter);
+    }
+
 
 }

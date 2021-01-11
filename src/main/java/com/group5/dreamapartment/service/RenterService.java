@@ -3,9 +3,10 @@ package com.group5.dreamapartment.service;
 import com.group5.dreamapartment.entity.Address;
 import com.group5.dreamapartment.entity.Apartment;
 import com.group5.dreamapartment.entity.Renter;
-import com.group5.dreamapartment.repository.ApartmentRepository;
 import com.group5.dreamapartment.repository.RenterRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class RenterService {
@@ -15,8 +16,8 @@ public class RenterService {
     this.renterRepository = renterRepository;
   }
 
-  public void create(String name, String socialSecNumber, long telNumber,
-                     String email, Address address, Address invoiceAddress) {
+  public Renter create(String name, String socialSecNumber, long telNumber,
+                       String email, Address address, Address invoiceAddress) {
 
     var renter = new Renter();
     renter.setAddress(address);
@@ -33,6 +34,7 @@ public class RenterService {
     
     this.renterRepository.save(renter);
 
+    return renter;
   }
 
   public Iterable<Renter> getAll() {
@@ -43,16 +45,27 @@ public class RenterService {
     this.renterRepository.deleteById(id);
   }
 
-  public void assignAptToRenter(Apartment apt, Renter renter) {
-    try{
+  public Renter assignAptToRenter(Apartment apt, Renter renter) {
+    if (apt.getRenter() == null && renter.getApartment() == null) {
       renter.setApartment(apt);
-      renterRepository.save(renter);
-    } catch (NullPointerException ex){
-      System.out.println("Something...! " + ex);
+      return renterRepository.save(renter);
+    } else if (apt.getRenter() != null){
+      throw new ResponseStatusException(
+          HttpStatus.BAD_REQUEST, "Apartment is already occupied."
+      );
+    } else {
+      throw new ResponseStatusException(
+          HttpStatus.BAD_REQUEST, "Renter har already an apartment."
+      );
     }
   }
 
   public Renter findRenter(Long renterID) {
     return this.renterRepository.findRenterById(renterID);
+  }
+
+  public Renter removeAptFromRnt(Renter renter) {
+    renter.setApartment(null);
+    return renterRepository.save(renter);
   }
 }

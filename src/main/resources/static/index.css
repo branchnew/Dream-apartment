@@ -1,108 +1,84 @@
-body {
-    height: 100vh;
-}
-.container {
-    font-family: "Lucida Grande";
-}
 
-.level:not(:last-child){
+html, body{
+    height: 100vh;
+    width: 100vw;
+    padding: 0;
     margin: 0;
 }
 
-.level {
-    background-color: #014956;
-}
-
-.link {
-    color: white;
-    font-weight: 400;
-    font-size: 20px;
-}
-
-a:hover {
-    color: white;
-    text-decoration-line: underline ;
-}
-
-.searching-input {
-    width: 1000px;
-}
-.hero-background {
-    background-image: url("./images/homefoto.jpg");
+body {
+    overflow: inherit;
+    background-image: url("images/foto1.jpg");
     background-size: cover;
-    background-position: center;
-    filter: opacity(30%);
-    height: 100vh;
-    width: 100%;
-    padding-top: 200px;
 }
-
 .search-input {
-    height: 100px;
     text-align: center;
     border-color: #9d9d9d;
+    height: 70px;
 }
 
-.input:focus {
-    box-shadow: none;
-    border-color: #e7e7e7;
+.search-input:hover {
+    box-shadow: 0 0 0 .125em rgba(50,115,220,.25);
+}
+
+.searching {
+    padding-top: 35px;
+    padding-left: 10px;
 }
 
 .input::placeholder {
-    color: #000000;
     text-align: center;
 }
 
-.input:hover {
-    border-color: #e7e7e7;
-}
-
-.icon {
-    padding-top: 350px;
+.logo h1, .logo h2 {
+    color: white;
 }
 
 .logo {
+    background-color: #0d2930;
+}
+
+.mnu {
+    padding: 0;
+    background-color: #0d2930;
+}
+
+.nav-statistic {
+    padding-bottom: 20px;
+}
+
+.apt-save-button, .renter-save-button{
+    float:right;
+    padding-right: 30px;
+}
+
+.menu {
+    padding-left: 3vw;
+    padding-top: 40px;
+}
+
+.menu li a {
     color: white;
-    font-size: 40px;
-    padding: 35px;
 }
 
-section .section {
-    font-weight: 400;
-    text-align: center;
+.main {
+    min-height: 690px;
 }
 
-.renter {
-    background-color: #ffd44c;
-}
-
-.apartment {
-    background-color: #f8b37a;
-}
-
-.apartment-form {
-    padding: 150px 50px 150px 50px;
-    height: 100vh;
-}
-.renter-form {
-    padding: 100px 50px 100px 50px;
-    height: 100vh;
+.menu p {
+    color: #bababa;
 }
 
 .textarea:not([rows]) {
     min-height: 9em;
 }
 
+.textarea:hover {
+    border-color: #e7e7e7;
+}
+
 .invoiceCheckbox {
     font-weight: 600;
-}
-
-.apt-save-button{
-    padding-top: 50px;
-}
-
-.renter-save-button{
-    padding-top: 50px;
 }
 
 .select select:not([multiple]) {
@@ -119,21 +95,27 @@ section .section {
     box-shadow: 0 0 0 .125em rgba(233, 233, 233, 0.25);
 }
 
-.footer {
-    background-color: #ececec;
- }
-
-@media screen and (min-width:1024px) {
-    .section.is-medium {
-        padding:0;
-    }
-    .section.is-large {
-        padding:0;
-    }
+.mnu {
+    padding: 10px;
 }
 
-@media screen and (min-width:769px),print {
-    .hero.is-large .hero-body {
-        padding: 0;
-    }
+.title.msg {
+    font-size: medium;
 }
+
+.rntrs, .noFree, .free {
+    padding-top: 15px;
+    font-size: medium;
+}
+
+.delete:hover {
+    background-color: rgba(206, 31, 31, 0.83);
+}
+
+.foot-text {
+    text-align: center;
+    color: white;
+    background-color: #0d2930;
+    padding: 5px;
+}
+
